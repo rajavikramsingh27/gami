@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/Users/granzax/Projects/Flutter/GAMI/gami-Hashim/build/google_sign_in/intermediates/res/merged/release/drawable-watch-v20/common_google_signin_btn_text_light_normal.xml",
+        "source": "/Users/granzax/.gradle/caches/transforms-2/files-2.1/979580aa35a10cbfab85533135f806d5/jetified-play-services-auth-16.0.1/res/drawable-watch-v20/common_google_signin_btn_text_light_normal.xml"
+    },
+    {
+        "merged": "/Users/granzax/Projects/Flutter/GAMI/gami-Hashim/build/google_sign_in/intermediates/res/merged/release/drawable-watch-v20/common_google_signin_btn_text_dark_normal.xml",
+        "source": "/Users/granzax/.gradle/caches/transforms-2/files-2.1/979580aa35a10cbfab85533135f806d5/jetified-play-services-auth-16.0.1/res/drawable-watch-v20/common_google_signin_btn_text_dark_normal.xml"
+    },
+    {
+        "merged": "/Users/granzax/Projects/Flutter/GAMI/gami-Hashim/build/google_sign_in/intermediates/res/merged/release/drawable-watch-v20/common_google_signin_btn_text_disabled.xml",
+        "source": "/Users/granzax/.gradle/caches/transforms-2/files-2.1/979580aa35a10cbfab85533135f806d5/jetified-play-services-auth-16.0.1/res/drawable-watch-v20/common_google_signin_btn_text_disabled.xml"
+    }
+]

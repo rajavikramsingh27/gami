@@ -1,0 +1,59 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml:1:1-21:12
+INJECTED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml:1:1-21:12
+INJECTED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml:1:1-21:12
+	package
+		ADDED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml:2:5-41
+		INJECTED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml
+		INJECTED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml:1:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml:4:5-67
+	android:name
+		ADDED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml:4:22-64
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml:5:5-81
+	android:name
+		ADDED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml:5:22-78
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml:6:5-79
+	android:name
+		ADDED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml:6:22-76
+uses-permission#android.permission.VIBRATE
+ADDED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml:7:5-66
+	android:name
+		ADDED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml:7:22-63
+application
+ADDED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml:9:5-20:19
+	android:networkSecurityConfig
+		ADDED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml:9:18-78
+activity#com.adcolony.sdk.AdColonyInterstitialActivity
+ADDED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml:10:9-14:80
+	android:hardwareAccelerated
+		ADDED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml:13:13-47
+	android:configChanges
+		ADDED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml:12:13-74
+	android:theme
+		ADDED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml:14:13-77
+	android:name
+		ADDED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml:11:13-73
+activity#com.adcolony.sdk.AdColonyAdViewActivity
+ADDED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml:15:9-19:80
+	android:hardwareAccelerated
+		ADDED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml:18:13-47
+	android:configChanges
+		ADDED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml:17:13-74
+	android:theme
+		ADDED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml:19:13-77
+	android:name
+		ADDED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml:16:13-67
+uses-sdk
+INJECTED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml
+INJECTED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml
+		ADDED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml
+		INJECTED from /Users/granzax/flutter_1.24.0-10.2.pre-beta/flutter/.pub-cache/hosted/pub.dartlang.org/adcolony-2.0.7/android/src/main/AndroidManifest.xml
