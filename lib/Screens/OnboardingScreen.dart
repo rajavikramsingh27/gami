@@ -25,18 +25,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   void initState() {
     super.initState();
 
-    Future.delayed(Duration(seconds:2),() async {
-      var userDetails = FirebaseAuth.instance.currentUser;
-      if (userDetails != null) {
-        strMobileNumber = userDetails.phoneNumber;
-
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => Tabbar()
-          ),
-        );
-      }
-    });
+    // Future.delayed(Duration(seconds:2),() async {
+    //   var userDetails = FirebaseAuth.instance.currentUser;
+    //   if (userDetails != null) {
+    //     strMobileNumber = userDetails.phoneNumber;
+    //
+    //     Navigator.push(
+    //       context,
+    //       MaterialPageRoute(builder: (context) => Tabbar()
+    //       ),
+    //     );
+    //   }
+    // });
   }
 
   @override

@@ -9,6 +9,8 @@ import 'package:gami/Screens/Loader.dart';
 import 'package:gami/Screens/Tabbar.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:gami/Screens/OnboardingScreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:gami/Constant/Constant.dart';
 
 
 
@@ -60,6 +62,8 @@ class MyAppState extends State<MyApp> {
   FlutterLocalNotificationsPlugin flutterLocalNotifications =
       FlutterLocalNotificationsPlugin();
 
+  bool isLoggedIn = false;
+
   @override
   void initState() {
     var initializationSettingsAndroid =
@@ -70,6 +74,30 @@ class MyAppState extends State<MyApp> {
     flutterLocalNotifications.initialize(initializationSettings,
         onSelectNotification: selectNotification);
     didCheckForNotificationPermission();
+
+    Future.delayed(Duration(seconds: 1), () async {
+
+      try {
+        final sharedPref = await SharedPreferences.getInstance();
+        final savedMobileNumber = sharedPref.get(kMobileNumber).toString();
+
+        // print('savedMobileNumbersavedMobileNumbersavedMobileNumbersavedMobileNumber');
+        // print(strMobileNumber);
+        // print(savedMobileNumber);
+        // print(savedMobileNumber.isNotEmpty);
+
+        if (savedMobileNumber == 'null' ||
+            savedMobileNumber.isEmpty) {
+          isLoggedIn = false;
+        } else {
+          isLoggedIn = true;
+          strMobileNumber = savedMobileNumber;
+        }
+      } on Exception catch (error) {
+
+      };
+    });
+
     super.initState();
   }
 
@@ -208,7 +236,7 @@ class MyAppState extends State<MyApp> {
   }) {
     switch (routeName) {
       case '/':
-        return OnboardingScreen();
+        return isLoggedIn ? Loader() : OnboardingScreen() ;
       default:
         throw 'Route $routeName is not defined';
     }

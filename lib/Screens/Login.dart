@@ -257,9 +257,7 @@ class _LoginState extends State<Login> {
       await Auth().signInWithGoogle(context).then((user) {
         if (user != null) {
 
-
         } else {
-
 
         }
       });

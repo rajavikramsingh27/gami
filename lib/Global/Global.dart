@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:gami/Constant/Constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gami/Screens/OnboardingScreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 String profilePictureEmpty(String fullName) {
   var arrDisplayName = fullName.split(' ');
@@ -105,7 +107,8 @@ logOut(context) {
               ),
             ),
             onPressed: () async {
-              FirebaseAuth.instance.signOut();
+              final sharedPref = await SharedPreferences.getInstance();
+              sharedPref.remove(kMobileNumber);
 
               Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
                   OnboardingScreen()), (Route<dynamic> route) => false);
@@ -130,7 +133,15 @@ logOut(context) {
   );
 }
 
+String getImage(Map<String,dynamic> _embedded) {
+  var arrFeaturedMedia = _embedded['_embedded']['wp:featuredmedia'];
 
+  if (arrFeaturedMedia == null) {
+    return '';
+  } else {
+    return 'https://gami.me/wp-content/uploads/'+arrFeaturedMedia[0]['media_details']['file'];
+  }
+}
 
 //    https://educity.app/flutter/how-to-do-hero-animation-in-flutter
 //    https://medium.com/flutter-community/a-deep-dive-into-hero-widgets-in-flutter-d34f441eb026

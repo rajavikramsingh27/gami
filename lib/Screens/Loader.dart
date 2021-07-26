@@ -5,7 +5,26 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gami/Constant/Constant.dart';
 import 'package:gami/Global/Global.dart';
 import 'package:gami/Screens/Tabbar.dart';
+import 'package:gami/Global/AppUserAuth.dart';
+import 'dart:async';
+import 'package:connectivity/connectivity.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
+
+// class Loader extends StatefulWidget {
+//   @override
+//   _LoaderState createState() => _LoaderState();
+// }
+//
+// class _LoaderState extends State<Loader> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       color: Colors.red,
+//     );
+//   }
+// }
 
 
 
@@ -13,8 +32,6 @@ class Loader extends StatefulWidget {
   @override
   _LoaderState createState() => _LoaderState();
 }
-
-
 
 class _LoaderState extends State<Loader> with TickerProviderStateMixin {
 
@@ -36,14 +53,54 @@ class _LoaderState extends State<Loader> with TickerProviderStateMixin {
       }
     });
 
-    Future.delayed(Duration(seconds:3),() {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Tabbar()),
-      );
+    Future.delayed(Duration(seconds:1),() {
+      getNewsPosts(context);
     });
 
   }
+
+  getNewsPosts(context) async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+
+    if (connectivityResult == ConnectivityResult.mobile
+        || connectivityResult == ConnectivityResult.wifi) {
+      // showLoading(context);
+      final response = await http.get(Uri.parse(wordPress_API));
+      // dismissLoading(context);
+
+      if (response.statusCode == 200) {
+        arrNewsPosts = List<Map<String, dynamic>>.from(jsonDecode(response.body));
+
+        // for (var _embedded in arrNewsPosts) {
+        //   // print('hellohellohellohellohello');
+        //   // print(asdf['_embedded']['wp:featuredmedia']);
+        //   var arrFeaturedMedia = _embedded['_embedded']['wp:featuredmedia'];
+        //   // var arrFeaturedMedia = List<Map<String, dynamic>>.from(asdf['_embedded']['wp:featuredmedia']);
+        //   // print(arrFeaturedMedia);
+        //
+        //   if (arrFeaturedMedia == null) {
+        //     // print('asdf');
+        //   } else {
+        //     // print(arrFeaturedMedia);
+        //     print('https://gami.me/wp-content/uploads/'+arrFeaturedMedia[0]['media_details']['file']);
+        //   }
+        // }
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Tabbar()),
+        );
+      } else {
+        throw Exception('Failed to load album');
+      }
+    } else {
+      shwoError(context, 'Check you internet connection.');
+    }
+
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -93,6 +150,5 @@ class _LoaderState extends State<Loader> with TickerProviderStateMixin {
     );
   }
 }
-
 
 

@@ -23,6 +23,7 @@ class _SignupScreenState extends State<SignupScreen> {
     // TODO: implement initState
     super.initState();
 
+    strDialCode = '+91';
   }
 
   @override

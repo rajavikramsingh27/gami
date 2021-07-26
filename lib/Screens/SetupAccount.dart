@@ -21,8 +21,8 @@ class _SetupAccountState extends State<SetupAccount> {
 
   final txtUserName = TextEditingController();
   final txtEmail = TextEditingController();
-  final txtPassword = TextEditingController();
-  final txtReEnterPassword = TextEditingController();
+  // final txtPassword = TextEditingController();
+  // final txtReEnterPassword = TextEditingController();
 
 
   @override
@@ -177,74 +177,74 @@ class _SetupAccountState extends State<SetupAccount> {
                 ),
               ),
             ),
-            SizedBox(height:20,),
-            Container(
-              height:50,
-              margin:EdgeInsets.only(left:40,right:40),
-              decoration:BoxDecoration(
-                  color:Colors.white,
-                  borderRadius:BorderRadius.circular(4)
-              ),
-              child:
-              TextFormField(
-                controller: txtPassword,
-                obscureText: true,
-                // inputFormatters: <TextInputFormatter>[
-                //   FilteringTextInputFormatter.digitsOnly
-                // ],
-                decoration: InputDecoration(
-                    border: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    errorBorder: InputBorder.none,
-                    disabledBorder: InputBorder.none,
-                    // prefixIcon: Icon(Icons.lock_open, color: Colors.grey),
-                    hintText: 'Password',
-                    hintStyle:TextStyle(
-                      // color:Colors.white,
-                        fontSize:12,
-                        fontFamily:'OpenSans',
-                        fontWeight:FontWeight.w600
-                    ),
-                    contentPadding:EdgeInsets.only(left:10,right:10)
-                  // EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 0.0),
-                ),
-              ),
-            ),
-            SizedBox(height:20,),
-            Container(
-              height:50,
-              margin:EdgeInsets.only(left:40,right:40),
-              decoration:BoxDecoration(
-                  color:Colors.white,
-                  borderRadius:BorderRadius.circular(4)
-              ),
-              child:
-              TextFormField(
-                controller: txtReEnterPassword,
-                obscureText: true,
-                // inputFormatters: <TextInputFormatter>[
-                //   FilteringTextInputFormatter.digitsOnly
-                // ],
-                decoration: InputDecoration(
-                    border: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    errorBorder: InputBorder.none,
-                    disabledBorder: InputBorder.none,
-                    // prefixIcon: Icon(Icons.lock_open, color: Colors.grey),
-                    hintText: 'Re-Enter Password',
-                    hintStyle:TextStyle(
-                      // color:Colors.white,
-                        fontSize:12,
-                        fontFamily:'OpenSans',
-                        fontWeight:FontWeight.w600
-                    ),
-                    contentPadding:EdgeInsets.only(left:10,right:10)
-                  // EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 0.0),
-                ),
-              ),
-            ),
+            // SizedBox(height:20,),
+            // Container(
+            //   height:50,
+            //   margin:EdgeInsets.only(left:40,right:40),
+            //   decoration:BoxDecoration(
+            //       color:Colors.white,
+            //       borderRadius:BorderRadius.circular(4)
+            //   ),
+            //   child:
+            //   TextFormField(
+            //     controller: txtPassword,
+            //     obscureText: true,
+            //     // inputFormatters: <TextInputFormatter>[
+            //     //   FilteringTextInputFormatter.digitsOnly
+            //     // ],
+            //     decoration: InputDecoration(
+            //         border: InputBorder.none,
+            //         focusedBorder: InputBorder.none,
+            //         enabledBorder: InputBorder.none,
+            //         errorBorder: InputBorder.none,
+            //         disabledBorder: InputBorder.none,
+            //         // prefixIcon: Icon(Icons.lock_open, color: Colors.grey),
+            //         hintText: 'Password',
+            //         hintStyle:TextStyle(
+            //           // color:Colors.white,
+            //             fontSize:12,
+            //             fontFamily:'OpenSans',
+            //             fontWeight:FontWeight.w600
+            //         ),
+            //         contentPadding:EdgeInsets.only(left:10,right:10)
+            //       // EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 0.0),
+            //     ),
+            //   ),
+            // ),
+            // SizedBox(height:20,),
+            // Container(
+            //   height:50,
+            //   margin:EdgeInsets.only(left:40,right:40),
+            //   decoration:BoxDecoration(
+            //       color:Colors.white,
+            //       borderRadius:BorderRadius.circular(4)
+            //   ),
+            //   child:
+            //   TextFormField(
+            //     controller: txtReEnterPassword,
+            //     obscureText: true,
+            //     // inputFormatters: <TextInputFormatter>[
+            //     //   FilteringTextInputFormatter.digitsOnly
+            //     // ],
+            //     decoration: InputDecoration(
+            //         border: InputBorder.none,
+            //         focusedBorder: InputBorder.none,
+            //         enabledBorder: InputBorder.none,
+            //         errorBorder: InputBorder.none,
+            //         disabledBorder: InputBorder.none,
+            //         // prefixIcon: Icon(Icons.lock_open, color: Colors.grey),
+            //         hintText: 'Re-Enter Password',
+            //         hintStyle:TextStyle(
+            //           // color:Colors.white,
+            //             fontSize:12,
+            //             fontFamily:'OpenSans',
+            //             fontWeight:FontWeight.w600
+            //         ),
+            //         contentPadding:EdgeInsets.only(left:10,right:10)
+            //       // EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 0.0),
+            //     ),
+            //   ),
+            // ),
             SizedBox(height:60,),
             Container(
               height:50,
@@ -271,13 +271,16 @@ class _SetupAccountState extends State<SetupAccount> {
                       shwoError(context, 'Enter your email');
                     } else if (!txtEmail.text.isValidEmail()) {
                       shwoError(context, 'Enter a valid email');
-                    } else if (txtPassword.text.isEmpty) {
-                      shwoError(context, 'Enter a password');
-                    } else if (txtReEnterPassword.text.isEmpty) {
-                      shwoError(context, 'Re-Enter a password');
-                    } else if (txtPassword.text != txtReEnterPassword.text) {
-                      shwoError(context, 'ReEntered Password must match with Password');
-                    } else {
+                    }
+                    // else if (txtPassword.text.isEmpty) {
+                    //   shwoError(context, 'Enter a password');
+                    // } else if (txtReEnterPassword.text.isEmpty) {
+                    //   shwoError(context, 'Re-Enter a password');
+                    // } else if (txtPassword.text != txtReEnterPassword.text) {
+                    //   shwoError(context, 'ReEntered Password must match with Password');
+                    // }
+
+                    else {
                       createInvitationCode();
                     }
 
@@ -307,7 +310,7 @@ class _SetupAccountState extends State<SetupAccount> {
       print(strInvitationCode);
       dismissLoading(context);
 
-      createUserWithEmailAndPassword(context, txtUserName.text, txtEmail.text, txtPassword.text);
+      createUserWithEmailAndPassword(context, txtUserName.text, txtEmail.text, '123456');
 
       setInvitedList(context, txtUserName.text);
   }

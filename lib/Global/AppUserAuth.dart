@@ -12,6 +12,7 @@ import 'package:gami/Global/Global.dart';
 import 'package:gami/Screens/Tabbar.dart';
 import 'package:gami/Screens/OTP_Screen.dart';
 import 'package:gami/Screens/SetupAccount.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 gmailSignIn(context) async {
@@ -97,8 +98,11 @@ createUserWithEmailAndPassword(context, String userName, String email, String pa
         kDeviceToken:'',
         kProfilePicture: '',
         kInvitationCode: strInvitationCode
-      }).then((value) {
+      }).then((value) async {
         dismissLoading(context);
+
+        final sharedPref = await SharedPreferences.getInstance();
+        sharedPref.setString(kMobileNumber, strMobileNumber);
 
         Navigator.push(
           context,
@@ -141,8 +145,9 @@ signInWithEmailAndPassword(context, String email, String password, ) async {
         kDeviceToken:'',
         kProfilePicture: '',
         kInvitationCode: strInvitationCode
-      }).then((value) {
+      }).then((value) async {
         dismissLoading(context);
+
         Navigator.push(
           context,
           PageRouteBuilder(
@@ -205,12 +210,18 @@ getOTP(context) async {
 
   FirebaseAuth.instance.verifyPhoneNumber(
     phoneNumber: strMobileNumber,
-    verificationCompleted: (PhoneAuthCredential credential) {},
-    verificationFailed: (FirebaseAuthException e) {},
+    verificationCompleted: (PhoneAuthCredential credential) {
+      strVerificationID = credential.verificationId;
+    },
+    verificationFailed: (FirebaseAuthException e) {
+
+    },
     codeSent: (String verificationId, int resendToken) {
       strVerificationID = verificationId;
     },
-    codeAutoRetrievalTimeout: (String verificationId) {},
+    codeAutoRetrievalTimeout: (String verificationId) {
+      strVerificationID = verificationId;
+    },
   ).then((value) {
     dismissLoading(context);
 
@@ -253,26 +264,31 @@ resendOTP(context) async {
 }
 
 void verifyOTP(context, String otp) async {
-  print('isFromSignUpisFromSignUpisFromSignUp');
-  print(isFromSignUp);
-
   showLoading(context);
 
-  final AuthCredential credential = PhoneAuthProvider.credential(
-      verificationId: strVerificationID, smsCode: otp
-  );
+  print('strVerificationIDstrVerificationIDstrVerificationID');
+  print(strVerificationID);
 
-  FirebaseAuth.instance.signInWithCredential(credential).then((value) async {
-    dismissLoading(context);
+  try {
+    final AuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: strVerificationID, smsCode: otp
+    );
 
-    isFromSignUp
-        ? funcRegistered(context)
-        : funcLogin(context);
-  }).catchError((error) {
-    print(error.message.toString());
+    FirebaseAuth.instance.signInWithCredential(credential).then((value) async {
+      dismissLoading(context);
+
+      isFromSignUp
+          ? funcRegistered(context)
+          : funcLogin(context);
+    }).catchError((error) {
+      print(error.message.toString());
+      dismissLoading(context);
+      shwoError(context, error.message.toString());
+    });
+  } catch (error) {
     dismissLoading(context);
-    shwoError(context, error.message.toString());
-  });
+   shwoError(context, 'strVerificationID is null '+error.message.toString());
+  }
 }
 
 funcRegistered(context) async {
@@ -284,20 +300,28 @@ funcRegistered(context) async {
   bool isNumberRegistered = false;
 
   for (var userData in _docData) {
-    if (strInvitatedCodeUsed == userData[kInvitationCode].toString()) {
-      isInvitatedCodeExist = true;
-      break;
-    } else {
-      isInvitatedCodeExist = false;
+    if (userData[kInvitatedCodeUsed] != null) {
+      if (strInvitatedCodeUsed == userData[kInvitationCode].toString()) {
+        isInvitatedCodeExist = true;
+        break;
+      } else {
+        isInvitatedCodeExist = false;
+      }
     }
   }
 
   for (var userData in _docData) {
-    if (strMobileNumber == userData[kMobileNumber].toString()) {
-      isNumberRegistered = true;
-      break;
-    } else {
-      isNumberRegistered = false;
+    print('strMobileNumberstrMobileNumberstrMobileNumberstrMobileNumber');
+    print(strMobileNumber);
+    print(userData[kMobileNumber]);
+
+    if (userData[kMobileNumber] != null) {
+      if (strMobileNumber == userData[kMobileNumber].toString()) {
+        isNumberRegistered = true;
+        break;
+      } else {
+        isNumberRegistered = false;
+      }
     }
   }
 
@@ -345,6 +369,9 @@ funcLogin(context) async {
   }
 
   if (isNumberRegistered) {
+    final sharedPref = await SharedPreferences.getInstance();
+    sharedPref.setString(kMobileNumber, strMobileNumber);
+
     Navigator.push(
       context,
       PageRouteBuilder(

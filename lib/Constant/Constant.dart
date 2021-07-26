@@ -8,6 +8,7 @@ const kThemeColor2 = '#4E053B'; //purple
 const kMagento = '#FA136F'; //Pink
 const kWPurple = '#7E1357'; //light purple/pink
 
+const wordPress_API = 'https://gami.me/wp-json/wp/v2/posts?_embed';
 const kFireBaseConnect = "__";
 
 const kID = 'id';

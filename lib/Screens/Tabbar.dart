@@ -1,7 +1,7 @@
 
 
 import 'dart:convert';
-
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gami/Screens/ProfileScreen.dart';
@@ -9,9 +9,8 @@ import 'package:gami/Screens/ShareScreen.dart';
 import 'package:gami/Screens/TimerScreen.dart';
 import 'package:gami/Global/Global.dart';
 import '../Constant/Constant.dart';
-import '../Global/Global.dart';
 
-import 'dart:io';
+import '../Global/Global.dart';
 
 import 'package:adcolony/adcolony.dart';
 import 'package:admob_flutter/admob_flutter.dart';
@@ -25,8 +24,12 @@ import 'dart:async';
 import 'package:connectivity/connectivity.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_html/flutter_html.dart';
+import 'package:gami/Screens/NewsPost_Details.dart';
 import 'package:html/dom.dart' as dom;
+import 'package:flutter_html/flutter_html.dart';
 
+
+List<Map<String, dynamic>> arrNewsPosts = [];
 
 
 class Tabbar extends StatefulWidget {
@@ -72,7 +75,6 @@ class _TabbarState extends State<Tabbar> with TickerProviderStateMixin {
   bool isAddColony = false;
   Map<String, dynamic> dictUserDetails = {};
   List<Map<String, dynamic>> arrInvitedList = [];
-  List<Map<String, dynamic>> arrNewsPosts = [];
 
 
   var facebookFlag = "0";
@@ -82,9 +84,6 @@ class _TabbarState extends State<Tabbar> with TickerProviderStateMixin {
   var first = 0;
   var strUserName = "";
 
-  Future<bool> onPressedBack() {
-    Navigator.pop(context);
-  }
 
 /*
 
@@ -139,7 +138,9 @@ InterstitialAd _interstitialAd;
     Future.delayed(Duration(microseconds:60),() {
       getUserData();
       getInvitedList();
-      getNewsPosts(context);
+      if (arrNewsPosts.length == 0) {
+        getNewsPosts(context);
+      }
 
       widthBGFull = MediaQuery.of(context).size.width;
       heightBGFull = MediaQuery.of(context).size.height;
@@ -329,7 +330,7 @@ InterstitialAd _interstitialAd;
     if (connectivityResult == ConnectivityResult.mobile
         || connectivityResult == ConnectivityResult.wifi) {
       showLoading(context);
-      final response = await http.get(Uri.parse('https://gami.me/wp-json/wp/v2/posts/'));
+      final response = await http.get(Uri.parse(wordPress_API));
       dismissLoading(context);
 
       if (response.statusCode == 200) {
@@ -351,7 +352,10 @@ InterstitialAd _interstitialAd;
   Widget build(BuildContext context) {
 
     return WillPopScope(
-      onWillPop:onPressedBack,
+      onWillPop:() {
+        // Navigator.pop(context);
+        return;
+      },
       child:Scaffold(
           backgroundColor:HexColor(kThemeColor),
           body:Stack(
@@ -624,58 +628,71 @@ InterstitialAd _interstitialAd;
                                 scrollDirection: Axis.vertical,
                                 itemCount:arrNewsPosts.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  return Container(
-                                    // height:300,
-                                    // color: Colors.red,
-                                    margin:EdgeInsets.only(bottom:24),
-                                    child:Column(
-                                      crossAxisAlignment:CrossAxisAlignment.start,
-                                      children:[
-                                        ClipRRect(
-                                          child: Image.asset(
-                                          'assets/images/NewsImage.jpeg',
-                                          width:MediaQuery.of(context).size.width,
-                                          //height:90,
-                                          fit: BoxFit.fitWidth,
-                                        ),
-                                          borderRadius: BorderRadius.circular(4),
-                                        ),
-                                        SizedBox(height:10,),
-                                        Text(
-                                          Map<String, dynamic>.from(arrNewsPosts[0]['title'])["rendered"],
-                                          // textAlign:TextAlign.center,
-                                          style:TextStyle(
-                                              color:Colors.white,
-                                              fontSize:20,
+                                  return FlatButton(
+                                    padding: EdgeInsets.zero,
+                                    child: Container(
+                                      // height:300,
+                                      // color: Colors.red,
+                                      margin:EdgeInsets.only(bottom:24),
+                                      child:Column(
+                                        crossAxisAlignment:CrossAxisAlignment.start,
+                                        children:[
+                                          ClipRRect(
+                                              borderRadius: BorderRadius.circular(4),
+                                              child: Image.network(
+                                                  getImage(arrNewsPosts[index])
+                                                // 'https://gami.me/wp-content/uploads/'+Map<String, dynamic>.from(arrNewsPosts[index]['media_details'])['file'],
+                                              )
 
-                                              fontFamily:'OpenSans',
-                                              fontWeight:FontWeight.w600
+                                            // Image.asset(
+                                            //   'assets/images/NewsImage.jpeg',
+                                            //   width:MediaQuery.of(context).size.width,
+                                            //   //height:90,
+                                            //   fit: BoxFit.fitWidth,
+                                            // ),
                                           ),
-                                        ),
-                                        // SizedBox(height:10,),
-                                        Html(
-                                          data: Map<String, dynamic>.from(arrNewsPosts[0]['content'])["rendered"],
-                                          defaultTextStyle: TextStyle(
-                                              color:Colors.white,
-                                              fontSize:12,
-                                              fontFamily:'OpenSans',
-                                              fontWeight:FontWeight.normal
+                                          SizedBox(height:10,),
+                                          Text(
+                                            Map<String, dynamic>.from(arrNewsPosts[index]['title'])["rendered"],
+                                            // textAlign:TextAlign.center,
+                                            style:TextStyle(
+                                                color:Colors.white,
+                                                fontSize:20,
+                                                fontFamily:'OpenSans',
+                                                fontWeight:FontWeight.w600
+                                            ),
                                           ),
-                                          // padding: EdgeInsets.all(8.0),
-                                          // onLinkTap: (url) {
-                                          //   print("Opening $url...");
-                                          // },
-                                          // customRender: (node, children) {
-                                          //   if (node is dom.Element) {
-                                          //     switch (node.localName) {
-                                          //       case "custom_tag": // using this, you can handle custom tags in your HTML
-                                          //         return Column(children: children);
-                                          //     }
-                                          //   }
-                                          // },
-                                        ),
-                                      ],
+                                          // SizedBox(height:10,),
+                                          Html(
+                                            data: Map<String, dynamic>.from(arrNewsPosts[index]['content'])["rendered"],
+                                            defaultTextStyle: TextStyle(
+                                                color:Colors.white,
+                                                fontSize:12,
+                                                fontFamily:'OpenSans',
+                                                fontWeight:FontWeight.normal
+                                            ),
+                                            // padding: EdgeInsets.all(8.0),
+                                            // onLinkTap: (url) {
+                                            //   print("Opening $url...");
+                                            // },
+                                            // customRender: (node, children) {
+                                            //   if (node is dom.Element) {
+                                            //     switch (node.localName) {
+                                            //       case "custom_tag": // using this, you can handle custom tags in your HTML
+                                            //         return Column(children: children);
+                                            //     }
+                                            //   }
+                                            // },
+                                          ),
+                                        ],
+                                      ),
                                     ),
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => NewsPost_Details(arrNewsPosts[index])),
+                                      );
+                                    },
                                   );
                                 }
                             ),
@@ -875,6 +892,9 @@ InterstitialAd _interstitialAd;
           semanticLabel: 'Mining',
         ),
         onPressed: () {
+
+
+
           Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
               TimerScreen()), (Route<dynamic> route) => false);
         },

@@ -163,8 +163,8 @@ class ShareScreen extends StatelessWidget {
 
                           Map<Permission, PermissionStatus> statuses = await [
                             Permission.contacts,
-                            Permission.storage,
-                            Permission.phone,
+                            // Permission.storage,
+                            // Permission.phone,
                           ].request();
                           Navigator.push(
                             context,
