@@ -8,14 +8,14 @@ bool _isShowing = false;
 BuildContext _context, _dismissingContext;
 bool _barrierDismissible = true, _showLogs = false;
 
-double _borderRadius = 8.0;
-Color _backgroundColor = Colors.transparent;
-Curve _insetAnimCurve = Curves.easeInOut;
+// double _borderRadius = 8.0;
+// Color _backgroundColor = Colors.transparent;
+// Curve _insetAnimCurve = Curves.easeInOut;
 
 Widget _progressWidget =    Image.asset('assets/images/NewsImage.png',);
 
 class ProgressDialog {
-  _Body _dialog;
+  // _Body _dialog;
   ProgressDialog(BuildContext context,
       {ProgressDialogType type, bool isDismissible, bool showLogs}) {
     _context = context;
@@ -60,7 +60,7 @@ class ProgressDialog {
 
   void show() {
     if (!_isShowing) {
-      _dialog = new _Body();
+      // _dialog = new _Body();
       _isShowing = true;
       if (_showLogs) debugPrint('ProgressDialog shown');
       showDialog<dynamic>(

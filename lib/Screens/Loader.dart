@@ -12,22 +12,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 
-// class Loader extends StatefulWidget {
-//   @override
-//   _LoaderState createState() => _LoaderState();
-// }
-//
-// class _LoaderState extends State<Loader> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       color: Colors.red,
-//     );
-//   }
-// }
-
-
-
 class Loader extends StatefulWidget {
   @override
   _LoaderState createState() => _LoaderState();
@@ -64,27 +48,9 @@ class _LoaderState extends State<Loader> with TickerProviderStateMixin {
 
     if (connectivityResult == ConnectivityResult.mobile
         || connectivityResult == ConnectivityResult.wifi) {
-      // showLoading(context);
-      final response = await http.get(Uri.parse(wordPress_API));
-      // dismissLoading(context);
-
+      final response = await http.get(Uri.parse(wordPressAPI));
       if (response.statusCode == 200) {
         arrNewsPosts = List<Map<String, dynamic>>.from(jsonDecode(response.body));
-
-        // for (var _embedded in arrNewsPosts) {
-        //   // print('hellohellohellohellohello');
-        //   // print(asdf['_embedded']['wp:featuredmedia']);
-        //   var arrFeaturedMedia = _embedded['_embedded']['wp:featuredmedia'];
-        //   // var arrFeaturedMedia = List<Map<String, dynamic>>.from(asdf['_embedded']['wp:featuredmedia']);
-        //   // print(arrFeaturedMedia);
-        //
-        //   if (arrFeaturedMedia == null) {
-        //     // print('asdf');
-        //   } else {
-        //     // print(arrFeaturedMedia);
-        //     print('https://gami.me/wp-content/uploads/'+arrFeaturedMedia[0]['media_details']['file']);
-        //   }
-        // }
 
         Navigator.push(
           context,
@@ -98,8 +64,6 @@ class _LoaderState extends State<Loader> with TickerProviderStateMixin {
     }
 
   }
-
-
 
 
   @override

@@ -1,20 +1,22 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:gami/Global/Global.dart';
 import '../Constant/Constant.dart';
 import '../Global/Global.dart';
 
-class ProfileScreen extends StatelessWidget{
 
+class ProfileScreen extends StatelessWidget {
   int selectedIndex;
   String strUserName;
   String strMobile;
+
   List<Map<String, dynamic>> arrInvitedList = [];
 
   ProfileScreen(this.selectedIndex, this.strUserName, this.strMobile, this.arrInvitedList);
 
   @override
   Widget build(BuildContext context) {
-
     return Visibility(
       visible:(selectedIndex == 2) ? true : false,
       child:Positioned(
@@ -26,7 +28,6 @@ class ProfileScreen extends StatelessWidget{
                 child:Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-
                     Container(
                       width:(MediaQuery.of(context).size.width-120)/2,
                       child:FittedBox(
@@ -35,7 +36,6 @@ class ProfileScreen extends StatelessWidget{
                           'Profile',
                           style:TextStyle(
                               color:HexColor(kMagento),
-                              // fontSize:27,
                               fontFamily:'OpenSans',
                               fontWeight:FontWeight.bold
                           ),
@@ -47,7 +47,7 @@ class ProfileScreen extends StatelessWidget{
                         width:MediaQuery.of(context).size.width-90,
                         child:SizedBox(
                           child:Text(
-                            'Need some text for the profile screen, for it to complete 2 lines',
+                            'Needs some text for the profile screen, for it to complete 2 lines',
                             style:TextStyle(
                               color:Colors.white,
                               // fontSize:15,
@@ -183,11 +183,10 @@ class ProfileScreen extends StatelessWidget{
                       ),
                     ),
                     Visibility(
-                      visible: (arrInvitedList.length == 0) ? false : true,
+                      visible: (arrInvitedList.length == 0) ? true : true,
                       child: Column(
                         children: [
                           SizedBox(height:24),
-
                           Text(
                             'All Contacts',
                             style:TextStyle(
@@ -197,9 +196,7 @@ class ProfileScreen extends StatelessWidget{
                                 fontWeight:FontWeight.w500
                             ),
                           ),
-
                           SizedBox(height:24),
-
                           Container(
                             width:MediaQuery.of(context).size.width,
                             height:111,
@@ -235,8 +232,7 @@ class ProfileScreen extends StatelessWidget{
                                                       fontWeight: FontWeight.w600
                                                   ),
                                                 ),
-                                              )
-                                                  : Image.network(
+                                              ) : Image.network(
                                                 arrInvitedList[index][kProfilePicture].toString(),
                                                 fit: BoxFit.fill,
                                                 height: 74,
@@ -268,7 +264,6 @@ class ProfileScreen extends StatelessWidget{
                       ),
                     ),
                     SizedBox(height:60),
-
                   ],
                 ),
               ),
@@ -279,3 +274,4 @@ class ProfileScreen extends StatelessWidget{
   }
 
 }
+

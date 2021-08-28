@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:gami/Constant/Constant.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gami/Screens/OnboardingScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -142,11 +141,5 @@ String getImage(Map<String,dynamic> _embedded) {
     return 'https://gami.me/wp-content/uploads/'+arrFeaturedMedia[0]['media_details']['file'];
   }
 }
-
-//    https://educity.app/flutter/how-to-do-hero-animation-in-flutter
-//    https://medium.com/flutter-community/a-deep-dive-into-hero-widgets-in-flutter-d34f441eb026
-//    https://fluttertutorial.in/image-animation-zoom-out-and-zoom-in/
-
-
 
 

@@ -152,37 +152,6 @@ class _LoginScreenState extends State<LoginScreen> {
               )
             ),
             SizedBox(height:20,),
-            // Container(
-            //   height:50,
-            //   margin:EdgeInsets.only(left:40,right:40),
-            //   decoration:BoxDecoration(
-            //       color:Colors.white,
-            //       borderRadius:BorderRadius.circular(4)
-            //   ),
-            //   child:TextFormField(
-            //     obscureText: true,
-            //     keyboardType:TextInputType.name,
-            //     decoration: InputDecoration(
-            //         border: InputBorder.none,
-            //         focusedBorder: InputBorder.none,
-            //         enabledBorder: InputBorder.none,
-            //         errorBorder: InputBorder.none,
-            //         disabledBorder: InputBorder.none,
-            //         // prefixIcon: Icon(Icons.lock_open, color: Colors.grey),
-            //         hintText: 'Password',
-            //
-            //         hintStyle:TextStyle(
-            //           // color:Colors.white,
-            //             fontSize:12,
-            //             fontFamily:'OpenSans',
-            //             fontWeight:FontWeight.w600
-            //         ),
-            //         contentPadding:EdgeInsets.only(left:10,right:10)
-            //       // EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 0.0),
-            //     ),
-            //   ),
-            // ),
-            // SizedBox(height:20,),
             Container(
               height:50,
               width: double.infinity,

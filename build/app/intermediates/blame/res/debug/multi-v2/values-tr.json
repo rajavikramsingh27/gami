@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/granzax/Projects/Flutter/GAMI/gami-Hashim/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-tr/values-tr.xml",
+            "outputFile": "/Users/granzax/Downloads/gami-Hashim 2/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-tr/values-tr.xml",
             "map": [
                 {
                     "source": "/Users/granzax/.gradle/caches/transforms-2/files-2.1/a92812e33ba8afe60f9f01b48cbb4837/jetified-play-services-base-17.1.0/res/values-tr/values.xml",
@@ -18,23 +18,6 @@
                         "startOffsets": "5315,5427,5614,5752,5859,6065,6197,6354,6695,6926,7035,7223,7359,7563,7760,7852,7946",
                         "endColumns": "111,186,137,106,205,131,156,134,230,108,187,135,203,196,91,93,108",
                         "endOffsets": "5422,5609,5747,5854,6060,6192,6349,6484,6921,7030,7218,7354,7558,7755,7847,7941,8050"
-                    }
-                },
-                {
-                    "source": "/Users/granzax/.gradle/caches/transforms-2/files-2.1/79bdaec1204ede648d0f08194aa7a1f3/jetified-play-services-basement-17.3.0/res/values-tr/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "247",
-                        "endColumns": "205",
-                        "endOffsets": "452"
-                    },
-                    "to": {
-                        "startLines": "60",
-                        "startColumns": "4",
-                        "startOffsets": "6489",
-                        "endColumns": "205",
-                        "endOffsets": "6690"
                     }
                 },
                 {
@@ -69,6 +52,23 @@
                         "startOffsets": "2797,2959,3096,3232,3345,3430,3516,3594,3682,3774,3887,3997,4090,4183,4290,4410,4492,4575,4752,4848,4957,5073,5176",
                         "endColumns": "161,136,135,112,84,85,77,87,91,112,109,92,92,106,119,81,82,176,95,108,115,102,138",
                         "endOffsets": "2954,3091,3227,3340,3425,3511,3589,3677,3769,3882,3992,4085,4178,4285,4405,4487,4570,4747,4843,4952,5068,5171,5310"
+                    }
+                },
+                {
+                    "source": "/Users/granzax/.gradle/caches/transforms-2/files-2.1/f52c8088c1da69a40df1f308895a008b/jetified-play-services-basement-17.3.0/res/values-tr/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "247",
+                        "endColumns": "205",
+                        "endOffsets": "452"
+                    },
+                    "to": {
+                        "startLines": "60",
+                        "startColumns": "4",
+                        "startOffsets": "6489",
+                        "endColumns": "205",
+                        "endOffsets": "6690"
                     }
                 },
                 {

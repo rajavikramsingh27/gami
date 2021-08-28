@@ -31,16 +31,6 @@ class _VideoScreenState extends State<VideoScreen> {
           aspectRatio: _controller.value.aspectRatio,
           child: VideoPlayer(_controller),
         )
-        /*
-        body: Center(
-          child: _controller.value.isInitialized
-              ? AspectRatio(
-            aspectRatio: _controller.value.aspectRatio,
-            child: VideoPlayer(_controller),
-          )
-              : Container(),
-        ),
-         */
       ),
     );
   }

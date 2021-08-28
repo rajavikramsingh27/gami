@@ -1,12 +1,6 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:gami/Constant/Constant.dart';
-import 'package:gami/Global/Global.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
-
 
 
 class AnimationTest extends StatefulWidget {
@@ -59,11 +53,6 @@ class _SplashScreenState extends State<SplashScreen>
     controller.forward().whenComplete(() {
       controller.reverse();
     });
-
-    /* Future.delayed(Duration(seconds: 1)).then((value) {
-      Navigator.of(context).pushReplacementNamed("/dashboard");
-    });
-*/
   }
 
   @override

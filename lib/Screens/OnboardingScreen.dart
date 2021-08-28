@@ -5,11 +5,9 @@ import 'package:gami/Screens/SignupScreen.dart';
 import 'package:gami/Screens/LoginScreen.dart';
 import '../Constant/Constant.dart';
 import '../Global/Global.dart';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gami/Constant/Constant.dart';
 import 'package:gami/Global/Global.dart';
-import 'package:gami/Screens/Tabbar.dart';
+
 
 class OnboardingScreen extends StatefulWidget {
   @override
@@ -24,19 +22,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   void initState() {
     super.initState();
-
-    // Future.delayed(Duration(seconds:2),() async {
-    //   var userDetails = FirebaseAuth.instance.currentUser;
-    //   if (userDetails != null) {
-    //     strMobileNumber = userDetails.phoneNumber;
-    //
-    //     Navigator.push(
-    //       context,
-    //       MaterialPageRoute(builder: (context) => Tabbar()
-    //       ),
-    //     );
-    //   }
-    // });
+    
   }
 
   @override
@@ -278,10 +264,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     decoration: BoxDecoration(
                       color: HexColor(kMagento),
                       borderRadius: BorderRadius.circular(12),
-                      // border:Border.all(
-                      //     color:Colors.white,
-                      //     width:1
-                      // )
                     ),
                     child: TextButton(
                       onPressed: () {

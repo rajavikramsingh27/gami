@@ -6,6 +6,7 @@ import 'package:gami/Global/AppUserAuth.dart';
 import '../Constant/Constant.dart';
 import '../Global/Global.dart';
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 class SignupScreen extends StatefulWidget {
@@ -18,57 +19,86 @@ class _SignupScreenState extends State<SignupScreen> {
   final txtPhoneNumber = TextEditingController();
   final txtInviteCode = TextEditingController();
 
+  List<Map<String, dynamic>> arrAllUserList = [];
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
     strDialCode = '+91';
+
+    Future.delayed(Duration(microseconds: 100), () {
+      getAllUsers();
+    });
+  }
+
+  getAllUsers() async {
+    showLoading(context);
+
+    final snapShot = await FirebaseFirestore.instance.collection('userDetails').get();
+    arrAllUserList = snapShot.docs.map((doc) => doc.data()).toList();
+    Navigator.pop(context);
+  }
+
+  bool isValidInvitationCode() {
+    bool isValidInviteCode;
+
+    for(final dictUserDetail in arrAllUserList) {
+      if (txtInviteCode.text == dictUserDetail['invitationCode'].toString()) {
+        isValidInviteCode = true;
+        break;
+      } else {
+        isValidInviteCode = false;
+      }
+    }
+
+    return isValidInviteCode;
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Container(
-                height: size.height,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        HexColor(kThemeColor),
-                        HexColor(kThemeColor2),
-                      ],
-                      begin: Alignment.center,
-                      end: Alignment.bottomCenter,
-                    )
-                ),
-                child: Center(
-                  child:
-                  buildSTatusText(),
-                )
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Container(
+                  height: size.height,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          HexColor(kThemeColor),
+                          HexColor(kThemeColor2),
+                        ],
+                        begin: Alignment.center,
+                        end: Alignment.bottomCenter,
+                      )
+                  ),
+                  child: Center(
+                    child:
+                    buildSTatusText(),
+                  )
 
+              ),
             ),
-          ),
-          SafeArea(
-            child: Container(
-              child: IconButton(
-                icon: Icon(
-                  Icons.arrow_back_outlined,
-                  size: 34,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              )
+            SafeArea(
+              child: Container(
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.arrow_back_outlined,
+                      size: 34,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  )
+              ),
             ),
-          ),
-        ],
-      )
+          ],
+        )
     );
   }
 
@@ -97,66 +127,63 @@ class _SignupScreenState extends State<SignupScreen> {
                 "Enter your phone number and invite code",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                      color: HexColor(kMagento),
-                      fontSize:27,
-                      fontFamily: 'Rajdhani',
-                      fontWeight: FontWeight.bold
-                  ),
+                    color: HexColor(kMagento),
+                    fontSize:27,
+                    fontFamily: 'Rajdhani',
+                    fontWeight: FontWeight.bold
+                ),
               ),
             ),
             SizedBox(height:20,),
             Container(
-              height:50,
-              margin:EdgeInsets.only(left:40,right:40),
-              decoration:BoxDecoration(
-                  color:Colors.white,
-                  borderRadius:BorderRadius.circular(4)
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    // color: Colors.red,
-                    width: 60,
-                    child: CountryCodePicker(
-                      onChanged: (value) {
-                        strDialCode = value.dialCode;
-                      },
-                      // backgroundColor: Colors.red,
-                      padding: EdgeInsets.zero,
-                      initialSelection: 'IN',
-                      showCountryOnly: true,
-                      showOnlyCountryWhenClosed: false,
-                      alignLeft: false,
-                      showFlag: false,
-                    ),
-                  ),
-                  Expanded(
-                    child: TextFormField(
-                      controller: txtPhoneNumber,
-                      keyboardType: TextInputType.number,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly],
-                      decoration: InputDecoration(
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
-                          // prefixIcon: Icon(Icons.lock_open, color: Colors.grey),
-                          hintText: 'Phone Number',
-                          hintStyle:TextStyle(
-                            // color:Colors.white,
-                              fontSize:12,
-                              fontFamily:'OpenSans',
-                              fontWeight:FontWeight.w600
-                          ),
-                          contentPadding:EdgeInsets.only(left:0,right:10)
-                        // EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 0.0),
+                height:50,
+                margin:EdgeInsets.only(left:40,right:40),
+                decoration:BoxDecoration(
+                    color:Colors.white,
+                    borderRadius:BorderRadius.circular(4)
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      // color: Colors.red,
+                      width: 60,
+                      child: CountryCodePicker(
+                        onChanged: (value) {
+                          strDialCode = value.dialCode;
+                        },
+                        // backgroundColor: Colors.red,
+                        padding: EdgeInsets.zero,
+                        initialSelection: 'IN',
+                        showCountryOnly: true,
+                        showOnlyCountryWhenClosed: false,
+                        alignLeft: false,
+                        showFlag: false,
                       ),
                     ),
-                  )
-                ],
-              )
+                    Expanded(
+                      child: TextFormField(
+                        controller: txtPhoneNumber,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly],
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            errorBorder: InputBorder.none,
+                            disabledBorder: InputBorder.none,
+                            hintText: 'Phone Number',
+                            hintStyle:TextStyle(
+                                fontSize:12,
+                                fontFamily:'OpenSans',
+                                fontWeight:FontWeight.w600
+                            ),
+                            contentPadding:EdgeInsets.only(left:0,right:10)
+                        ),
+                      ),
+                    )
+                  ],
+                )
             ),
             SizedBox(height:20,),
             Container(
@@ -175,9 +202,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     enabledBorder: InputBorder.none,
                     errorBorder: InputBorder.none,
                     disabledBorder: InputBorder.none,
-                    // prefixIcon: Icon(Icons.lock_open, color: Colors.grey),
                     hintText: 'Invite Code',
-
                     hintStyle:TextStyle(
                       // color:Colors.white,
                         fontSize:12,
@@ -209,10 +234,14 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ),
                   onPressed:() {
+                    FocusScope.of(context).unfocus();
+
                     if (txtPhoneNumber.text.isEmpty) {
                       shwoError(context, 'Enter your phone number');
                     } else if (txtInviteCode.text.isEmpty) {
                       shwoError(context, 'Enter a invite code');
+                    } else if (!isValidInvitationCode())  {
+                      shwoError(context, 'Enter a valid invitation code');
                     } else {
                       isFromSignUp = true;
                       strMobileNumber =  strDialCode+txtPhoneNumber.text;

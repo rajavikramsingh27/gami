@@ -40,15 +40,12 @@ class _ProfileState extends State<Profile> {
           child:Column(
             children: [
               SizedBox(height:30,),
-              /*Image.asset(
-                'assets/images/white-blue_TEXT.png',
-                width:MediaQuery.of(context).size.width-(80*2),
-                fit:BoxFit.fill,
-              ),*/
-              Icon(Icons.account_circle, size: MediaQuery.of(context).size.width/2, color: Colors.white,),
-
+              Icon(
+                Icons.account_circle,
+                size: MediaQuery.of(context).size.width/2,
+                color: Colors.white,
+              ),
               SizedBox(height:44,),
-
               Container(
                 height:50,
                 margin:EdgeInsets.only(left:40,right:40),
@@ -153,16 +150,13 @@ class _ProfileState extends State<Profile> {
                       enabledBorder: InputBorder.none,
                       errorBorder: InputBorder.none,
                       disabledBorder: InputBorder.none,
-                      // prefixIcon: Icon(Icons.lock_open, color: Colors.grey),
                       hintText: 'Mobile Number',
                       hintStyle:TextStyle(
-                        // color:Colors.white,
                           fontSize:16,
                           fontFamily:'OpenSans',
                           fontWeight:FontWeight.w600
                       ),
                       contentPadding:EdgeInsets.only(left:10,right:10)
-                    // EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 0.0),
                   ),
                 ),
               ),
@@ -185,12 +179,7 @@ class _ProfileState extends State<Profile> {
                             fontWeight:FontWeight.bold
                         ),
                       ),
-                      onPressed:() {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(builder: (context) => Tabbar()),
-                        // );
-                      }),
+                      onPressed:() { }),
               ),
             ],
           ),

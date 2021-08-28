@@ -1,8 +1,25 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/granzax/Projects/Flutter/GAMI/gami-Hashim/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-zh-rCN/values-zh-rCN.xml",
+            "outputFile": "/Users/granzax/Downloads/gami-Hashim 2/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-zh-rCN/values-zh-rCN.xml",
             "map": [
+                {
+                    "source": "/Users/granzax/.gradle/caches/transforms-2/files-2.1/f52c8088c1da69a40df1f308895a008b/jetified-play-services-basement-17.3.0/res/values-zh-rCN/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "251",
+                        "endColumns": "157",
+                        "endOffsets": "408"
+                    },
+                    "to": {
+                        "startLines": "60",
+                        "startColumns": "4",
+                        "startOffsets": "5860",
+                        "endColumns": "157",
+                        "endOffsets": "6013"
+                    }
+                },
                 {
                     "source": "/Users/granzax/.gradle/caches/transforms-2/files-2.1/a44107bf8b52998357d252cf67fd2b9d/jetified-firebase-messaging-20.3.0/res/values-zh-rCN/values.xml",
                     "from": {
@@ -103,23 +120,6 @@
                         "startOffsets": "2662,2790,2890,2999,3108,3187,3269,3341,3426,3511,3617,3719,3805,3891,3982,4091,4169,4248,4366,4459,4554,4660,4754",
                         "endColumns": "127,99,108,108,78,81,71,84,84,105,101,85,85,90,108,77,78,117,92,94,105,93,85",
                         "endOffsets": "2785,2885,2994,3103,3182,3264,3336,3421,3506,3612,3714,3800,3886,3977,4086,4164,4243,4361,4454,4549,4655,4749,4835"
-                    }
-                },
-                {
-                    "source": "/Users/granzax/.gradle/caches/transforms-2/files-2.1/79bdaec1204ede648d0f08194aa7a1f3/jetified-play-services-basement-17.3.0/res/values-zh-rCN/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "251",
-                        "endColumns": "157",
-                        "endOffsets": "408"
-                    },
-                    "to": {
-                        "startLines": "60",
-                        "startColumns": "4",
-                        "startOffsets": "5860",
-                        "endColumns": "157",
-                        "endOffsets": "6013"
                     }
                 }
             ]

@@ -3,12 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:gami/Constant/Constant.dart';
 import 'package:gami/Global/Global.dart';
-import 'package:flutter/material.dart';
-import 'package:gami/Constant/Constant.dart';
-import 'package:gami/Global/Global.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
 
 
 class Share extends StatefulWidget {
@@ -40,7 +34,6 @@ class _ShareState extends State<Share> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // backgroundColor:HexColor(kThemeColor),
         body:Stack(
           children:[
             Positioned(
@@ -51,7 +44,6 @@ class _ShareState extends State<Share> with SingleTickerProviderStateMixin {
                       'assets/images/LOGO.png',
                       width:MediaQuery.of(context).size.width-(145*2),
                       fit:BoxFit.fill,
-                      // fit:BoxFit.fitWidth,
                     ),
                   ),
                 )
@@ -141,10 +133,6 @@ class _ShareState extends State<Share> with SingleTickerProviderStateMixin {
                     decoration:BoxDecoration(
                       color:HexColor(kMagento),
                       borderRadius:BorderRadius.circular(5),
-                      // border:Border.all(
-                      //     color:Colors.white,
-                      //     width:1
-                      // )
                     ),
                     child:TextButton(
                       onPressed:() {

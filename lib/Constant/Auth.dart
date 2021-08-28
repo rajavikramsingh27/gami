@@ -5,10 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gami/Screens/Tabbar.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:toast/toast.dart';
-
 import 'Constant.dart';
-import 'package:country_code_picker/country_codes.dart';
 
 class Auth {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -17,7 +14,7 @@ class Auth {
   String email;
   String imageUrl;
 
-  Future<User> signInWithGoogle(BuildContext context) async {
+  signInWithGoogle(BuildContext context) async {
     try {
       final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
       final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
@@ -39,7 +36,7 @@ class Auth {
 
         socailUserSetData(context, credential);
       }
-      final User currentUser = await _auth.currentUser;
+      final User currentUser =  _auth.currentUser;
       currentUser.getIdToken();
       assert(!user.isAnonymous);
       assert(await user.getIdToken() != null);

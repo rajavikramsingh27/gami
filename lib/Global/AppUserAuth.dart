@@ -34,30 +34,7 @@ loginWithFacebook(context) async {
     case FacebookLoginStatus.loggedIn:
 
       showLoading(context);
-      final FacebookAccessToken accessToken = result.accessToken;
-      print(accessToken.token);
-
-      // var urlFacebook = Uri.parse('https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email,picture,gender,birthday&access_token=${accessToken.token}');
-
-      // final graphResponse = await http.get(
-      //     urlFacebook
-      // );
-
-      // var dictSocialProfile = json.decode(graphResponse.body);
-      // print(dictSocialProfile);
-      //
-      // Map<String, dynamic> dictPicture = dictSocialProfile['picture'];
-      // Map<String, dynamic> dictData = dictPicture['data'];
-      // dictSocialProfile['picture'] = dictData['url'];
-      // print(dictSocialProfile);
-      // dismissLoading(context);
-
-      // print(result.accessToken);
-      // showLoading(context);
-      // FacebookAccessToken myToken = result.accessToken;
-      //
-      // AuthCredential credential = FacebookAuthProvider.credential(myToken.token);
-      // socailUserSetData(context, credential);
+      // final FacebookAccessToken accessToken = result.accessToken;
 
       break;
     case FacebookLoginStatus.cancelledByUser:
@@ -76,9 +53,6 @@ loginWithFacebook(context) async {
 }
 
 createUserWithEmailAndPassword(context, String userName, String email, String password,) async {
-  print('createUserWithEmailAndPasswordcreateUserWithEmailAndPasswordcreateUserWithEmailAndPassword');
-  print(strMobileNumber);
-
   showLoading(context);
   try {
     await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -109,11 +83,6 @@ createUserWithEmailAndPassword(context, String userName, String email, String pa
           MaterialPageRoute(builder: (context) => Tabbar()),
         );
 
-        // Navigator.of(context).pushAndRemoveUntil(
-        //     MaterialPageRoute(
-        //         builder: (context) =>
-        //             Tabbar()), (Route<dynamic> route) => false
-        // );
       });
 
     });
@@ -210,18 +179,12 @@ getOTP(context) async {
 
   FirebaseAuth.instance.verifyPhoneNumber(
     phoneNumber: strMobileNumber,
-    verificationCompleted: (PhoneAuthCredential credential) {
-      strVerificationID = credential.verificationId;
-    },
-    verificationFailed: (FirebaseAuthException e) {
-
-    },
+    verificationCompleted: (PhoneAuthCredential credential) {},
+    verificationFailed: (FirebaseAuthException e) {},
     codeSent: (String verificationId, int resendToken) {
       strVerificationID = verificationId;
     },
-    codeAutoRetrievalTimeout: (String verificationId) {
-      strVerificationID = verificationId;
-    },
+    codeAutoRetrievalTimeout: (String verificationId) {},
   ).then((value) {
     dismissLoading(context);
 
@@ -230,7 +193,7 @@ getOTP(context) async {
         context,
         PageRouteBuilder(
           transitionDuration: Duration(milliseconds: 777),
-          pageBuilder: (_, __, ___) => OTP_Screen(),
+          pageBuilder: (_, __, ___) => OTPScreen(),
         ),
       );
     // }
@@ -255,6 +218,9 @@ resendOTP(context) async {
     },
     codeAutoRetrievalTimeout: (String verificationId) {},
   ).then((value) {
+    print('strVerificationIDstrVerificationIDstrVerificationID');
+    print(strVerificationID);
+
     dismissLoading(context);
   }).catchError((error) {
     dismissLoading(context);
@@ -265,9 +231,6 @@ resendOTP(context) async {
 
 void verifyOTP(context, String otp) async {
   showLoading(context);
-
-  print('strVerificationIDstrVerificationIDstrVerificationID');
-  print(strVerificationID);
 
   try {
     final AuthCredential credential = PhoneAuthProvider.credential(
@@ -311,10 +274,6 @@ funcRegistered(context) async {
   }
 
   for (var userData in _docData) {
-    print('strMobileNumberstrMobileNumberstrMobileNumberstrMobileNumber');
-    print(strMobileNumber);
-    print(userData[kMobileNumber]);
-
     if (userData[kMobileNumber] != null) {
       if (strMobileNumber == userData[kMobileNumber].toString()) {
         isNumberRegistered = true;
@@ -385,24 +344,22 @@ funcLogin(context) async {
 }
 
 // setInvitedList(context, String full_name, Uint8List image) {
-setInvitedList(context, String full_name) {
-  final currentUser = FirebaseAuth.instance.currentUser;
+setInvitedList(context, String fullName) {
+  // final currentUser = FirebaseAuth.instance.currentUser;
 
   FirebaseFirestore.instance
       .collection(tblInvitedList)
       .doc(strInvitatedCodeUsed)
-      .collection(currentUser.uid)
-      .doc(full_name.split(' ')[0]+kFireBaseConnect+strInvitationCode)
+      // .collection(currentUser.uid)
+      .collection(strInvitatedCodeUsed)
+      .doc(fullName.split(' ')[0]+kFireBaseConnect+strInvitationCode)
       .set({
     kID: DateTime.now().microsecondsSinceEpoch.toString(),
-    kUserName: full_name,
+    kUserName: fullName,
     kProfilePicture: '',
     kInvitationCode: strInvitationCode,
     kCreatedTime: DateTime.now().millisecondsSinceEpoch.toString(),
   }).then((value) {
-    // if (image != null && image.length > 0) {
-    //   image.upload_Image_Uint8List(context, full_name, strInvitationCode);
-    // }
   }).catchError((error) {
     shwoError(context, error.message.toString());
   });

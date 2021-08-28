@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:gami/Global/Global.dart';
 import '../Constant/Constant.dart';
@@ -8,7 +10,6 @@ import 'package:gami/Screens/ContactListPage.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:gami/Constant/Constant.dart';
 import 'dart:async';
-
 
 
 class ShareScreen extends StatelessWidget {
@@ -42,7 +43,6 @@ class ShareScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-
                     Container(
                       width: MediaQuery
                           .of(context)
@@ -150,10 +150,6 @@ class ShareScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: HexColor(kMagento),
                         borderRadius: BorderRadius.circular(12),
-                        // border:Border.all(
-                        //     color:Colors.white,
-                        //     width:1
-                        // )
                       ),
                       child: TextButton(
                         onPressed: () async {
@@ -161,11 +157,10 @@ class ShareScreen extends StatelessWidget {
 
                           }
 
-                          Map<Permission, PermissionStatus> statuses = await [
-                            Permission.contacts,
-                            // Permission.storage,
-                            // Permission.phone,
-                          ].request();
+                          // Map<Permission, PermissionStatus> statuses = await [
+                          //   Permission.contacts,
+                          // ].request();
+
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => ContactListPage()),
@@ -217,7 +212,7 @@ class ShareScreen extends StatelessWidget {
                           .of(context)
                           .padding
                           .bottom + 130,
-                    )
+                    ),
                   ],
                 ),
               ),

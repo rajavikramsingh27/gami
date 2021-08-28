@@ -1,3 +1,5 @@
+
+
 import 'package:app_settings/app_settings.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -12,31 +14,6 @@ import 'package:gami/Screens/OnboardingScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:gami/Constant/Constant.dart';
 
-
-
-/*
-
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
-      .then((_) async {
-    await Firebase.initializeApp();
-    runApp(MyApp());
-  });
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        // home: MyAds(),
-        home:Tabbar()
-    );
-  }
-
-}*/
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -81,11 +58,6 @@ class MyAppState extends State<MyApp> {
         final sharedPref = await SharedPreferences.getInstance();
         final savedMobileNumber = sharedPref.get(kMobileNumber).toString();
 
-        // print('savedMobileNumbersavedMobileNumbersavedMobileNumbersavedMobileNumber');
-        // print(strMobileNumber);
-        // print(savedMobileNumber);
-        // print(savedMobileNumber.isNotEmpty);
-
         if (savedMobileNumber == 'null' ||
             savedMobileNumber.isEmpty) {
           isLoggedIn = false;
@@ -94,8 +66,8 @@ class MyAppState extends State<MyApp> {
           strMobileNumber = savedMobileNumber;
         }
       } on Exception catch (error) {
-
-      };
+        debugPrint(error.toString());
+      }
     });
 
     super.initState();
@@ -169,12 +141,8 @@ class MyAppState extends State<MyApp> {
         // print("onResume: ${json.decode(json.encode(message))['type']}");
       },
     );
-    var initializationSettingsIOS =
-        IosNotificationSettings(sound: true, badge: true, alert: true);
-    var initializationSettings =
-        new InitializationSettings(iOS: IOSInitializationSettings());
-    /*  flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: onSelectNotification);*/
+
+    final initializationSettingsIOS = IosNotificationSettings(sound: true, badge: true, alert: true);
 
     _firebaseMessaging
         .requestNotificationPermissions(initializationSettingsIOS);

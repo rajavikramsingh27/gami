@@ -1,6 +1,6 @@
 {
   "name": "flutter_facebook_auth",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "summary": "Plugin to Facebook authentication for iOS in your Flutter app",
   "description": "Plugin to Facebook authentication for iOS in your Flutter app",
   "homepage": "https://meedu.app",
@@ -19,10 +19,10 @@
 
     ],
     "FBSDKCoreKit": [
-      "~> 11.0.0"
+      "~> 9.0.0"
     ],
     "FBSDKLoginKit": [
-      "~> 11.0.0"
+      "~> 9.0.0"
     ]
   },
   "platforms": {

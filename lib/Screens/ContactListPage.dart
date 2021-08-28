@@ -1,7 +1,7 @@
 
 
-import 'dart:typed_data';
 
+import 'dart:typed_data';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,7 +10,6 @@ import 'package:gami/Global/Global.dart';
 import 'package:intl/intl.dart';
 import 'package:gami/Constant/Constant.dart';
 import 'package:flutter_sms/flutter_sms.dart';
-import 'package:gami/Global/AppUserAuth.dart';
 import 'package:toast/toast.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -24,24 +23,21 @@ class ContactListPage extends StatefulWidget {
 }
 
 class _ContactListPageState extends State<ContactListPage> {
-  List<Contact> _contacts;
+  List<Contact> contacts;
 
   @override
   void initState() {
     super.initState();
+
     refreshContacts();
   }
 
   Future<void> refreshContacts() async {
-    // Load without thumbnails initially.
-    var contacts = (await ContactsService.getContacts(
+    contacts = (await ContactsService.getContacts(
         withThumbnails: false, iOSLocalizedLabels: iOSLocalizedLabels))
         .toList();
-//      var contacts = (await ContactsService.getContactsForPhone("8554964652"))
-//          .toList();
-    setState(() {
-      _contacts = contacts;
-    });
+
+    setState(() { });
 
     // Lazy load thumbnails after rendering initial contacts.
     for (final contact in contacts) {
@@ -53,7 +49,7 @@ class _ContactListPageState extends State<ContactListPage> {
   }
 
   void updateContact() async {
-    Contact ninja = _contacts
+    Contact ninja = contacts
         .toList()
         .firstWhere((contact) => contact.familyName.startsWith("Ninja"));
     ninja.avatar = null;
@@ -62,21 +58,7 @@ class _ContactListPageState extends State<ContactListPage> {
     refreshContacts();
   }
 
-  // _openContactForm() async {
-  //   try {
-  //     var contact = await ContactsService.openContactForm(
-  //         iOSLocalizedLabels: iOSLocalizedLabels);
-  //     refreshContacts();
-  //   } on FormOperationException catch (e) {
-  //     switch (e.errorCode) {
-  //       case FormOperationErrorCode.FORM_OPERATION_CANCELED:
-  //       case FormOperationErrorCode.FORM_COULD_NOT_BE_OPEN:
-  //       case FormOperationErrorCode.FORM_OPERATION_UNKNOWN_ERROR:
-  //       default:
-  //         print(e.errorCode);
-  //     }
-  //   }
-  // }
+
 
   @override
   Widget build(BuildContext context) {
@@ -103,36 +85,22 @@ class _ContactListPageState extends State<ContactListPage> {
           },
         ),
       ),
-
-      // floatingActionButton: FloatingActionButton(
-      //   child: Icon(Icons.add),
-      //   onPressed: () {
-      //     Navigator.of(context).pushNamed("/add").then((_) {
-      //       refreshContacts();
-      //     });
-      //   },
-      // ),
       body: SafeArea(
-        child: _contacts != null
+        child: contacts != null
             ? ListView.builder(
-          itemCount: _contacts?.length ?? 0,
+          itemCount: contacts?.length ?? 0,
           itemBuilder: (BuildContext context, int index) {
-            Contact c = _contacts?.elementAt(index);
+            Contact c = contacts?.elementAt(index);
             return ListTile(
               onTap: () async {
                 var invitationLink = "Here is my invitation link for GAMI App. Use the invitation code: $strInvitationCode. "
                     "Download at $playStoreLink";
-
-                // Future.delayed(Duration(seconds: 1),() async {
                   await sendSMS(
                       message: invitationLink,
                       recipients: [c.phones.first.value]
-                  ).then((value) {
-                    // setInvitedList(context, c.displayName, c.avatar, strInvitationCode);
-                  }).whenComplete(() {
-                    print('when complete');
+                  ).then((value) { }).whenComplete(() {
+
                   });
-                // });
               },
               leading: (c.avatar != null && c.avatar.length > 0)
                   ? CircleAvatar(backgroundImage: MemoryImage(c.avatar))
@@ -159,8 +127,7 @@ class _ContactListPageState extends State<ContactListPage> {
               ),
             );
           },
-        )
-            : Center(
+        ) : Center(
           child: CircularProgressIndicator(),
         ),
       ),
@@ -169,8 +136,8 @@ class _ContactListPageState extends State<ContactListPage> {
 
   void contactOnDeviceHasBeenUpdated(Contact contact) {
     this.setState(() {
-      var id = _contacts.indexWhere((c) => c.identifier == contact.identifier);
-      _contacts[id] = contact;
+      var id = contacts.indexWhere((c) => c.identifier == contact.identifier);
+      contacts[id] = contact;
     });
   }
 }
@@ -206,10 +173,6 @@ class ContactDetailsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(_contact.displayName ?? ""),
         actions: <Widget>[
-//          IconButton(
-//            icon: Icon(Icons.share),
-//            onPressed: () => shareVCFCard(context, contact: _contact),
-//          ),
           IconButton(
             icon: Icon(Icons.delete),
             onPressed: () => ContactsService.deleteContact(_contact),
@@ -586,19 +549,14 @@ class _UpdateContactsPageState extends State<UpdateContactsPage> {
   }
 }
 
-
-
 extension UploadImage on Uint8List {
-  Future<void> upload_Image_Uint8List(context, String full_name, String invitationCode) async {
-
+  Future<void> uploadImageUint8List(context, String fullName, String invitationCode) async {
     var ref = FirebaseStorage.instance.ref().child('invitedList_ProfilePicture/')
-        .child(full_name.split(' ')[0]+kFireBaseConnect+invitationCode);
+        .child(fullName.split(' ')[0]+kFireBaseConnect+invitationCode);
 
     var uploadTask = ref.putData(this);
 
-    var storageTaskSnapshot = await uploadTask.whenComplete(() {
-
-    });
+    var storageTaskSnapshot = await uploadTask.whenComplete(() { });
 
     var downloadUrl = await storageTaskSnapshot.ref.getDownloadURL();
 
@@ -607,10 +565,11 @@ extension UploadImage on Uint8List {
     FirebaseFirestore.instance.collection(tblInvitedList)
         .doc(strInvitationCode)
         .collection(currentUser.uid)
-        .doc(full_name.split(' ')[0]+kFireBaseConnect+invitationCode)
+        .doc(fullName.split(' ')[0]+kFireBaseConnect+invitationCode)
         .update({
       kProfilePicture:downloadUrl
     }).then((value) {
+
     }).catchError((error) {
       Toast.show(
           error.message.toString(), context,
@@ -618,4 +577,5 @@ extension UploadImage on Uint8List {
       );
     });
   }
+
 }

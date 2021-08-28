@@ -7,29 +7,29 @@ import '../Global/Global.dart';
 
 
 
-class OTP_Screen extends StatefulWidget {
+class OTPScreen extends StatefulWidget {
   @override
-  _OTP_ScreenState createState() => _OTP_ScreenState();
+  _OTPScreenState createState() => _OTPScreenState();
 }
 
-class _OTP_ScreenState extends State<OTP_Screen> {
+class _OTPScreenState extends State<OTPScreen> {
 
   final txtOTP = TextEditingController();
-  var isResendOTP_ButtonVisible = false;
+  var isResendOTPButtonVisible = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    resendOTP_ButtonVisible();
+    resendOTPButtonVisible();
   }
 
-  resendOTP_ButtonVisible() {
-    isResendOTP_ButtonVisible = false;
+  resendOTPButtonVisible() {
+    isResendOTPButtonVisible = false;
 
     Future.delayed(Duration(seconds: 60),() {
-      isResendOTP_ButtonVisible = true;
+      isResendOTPButtonVisible = true;
 
       setState(() {
 
@@ -199,7 +199,7 @@ class _OTP_ScreenState extends State<OTP_Screen> {
             ),
             SizedBox(height:20,),
             Visibility(
-              visible: isResendOTP_ButtonVisible,
+              visible: isResendOTPButtonVisible,
               child: Container(
                 height:50,
                 width: double.infinity,
@@ -219,10 +219,8 @@ class _OTP_ScreenState extends State<OTP_Screen> {
                       ),
                     ),
                     onPressed:() {
-                      resendOTP_ButtonVisible();
+                      resendOTPButtonVisible();
                       resendOTP(context);
-                      // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                      // Tabbar()), (Route<dynamic> route) => false);
                     }),
               ),
             )

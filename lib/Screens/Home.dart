@@ -11,7 +11,7 @@ class Home extends StatefulWidget {
 }
 
 
-double size_Watch_Earn_Text = 5;
+// double size_Watch_Earn_Text = 5;
 
 bool isAnimated = false;
 
@@ -22,8 +22,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
   double heightWatchEarn = 100;
 
-  double white_blue_TEXT_LeftPadding = 0;
-  var white_blue_TEXT_AnimTime = 0;
+  double whiteBlueTextLeftPadding = 0;
+  var whiteBlueTextAnimTime = 0;
 
   double widthAnim = 200;
   double heightAnim = 500;
@@ -34,13 +34,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     // TODO: implement initState
     super.initState();
 
-    white_blue_TEXT_LeftPadding = 400;
-
-    // Future.delayed(Duration(microseconds:1),() {
-    //   if (isAnimated == false) {
-    //     white_blue_TEXT_LeftPadding = (MediaQuery.of(context).size.width/2)-(MediaQuery.of(context).size.width-(80*2))/2;
-    //   }
-    // });
+    whiteBlueTextLeftPadding = 400;
 
     Future.delayed(Duration(microseconds:5),() {
 
@@ -49,7 +43,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       heightAnim = MediaQuery.of(context).size.height;
 
       if (!isAnimated) {
-        size_Watch_Earn_Text = 20;
+        sizeWatchEarnText = 20;
 
         Future.delayed(Duration(seconds:1),() {
           isAnimated = true;
@@ -63,20 +57,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       });
     });
 
-
-
     Future.delayed(Duration(milliseconds:50),() {
-
       if (isAnimated) {
-        white_blue_TEXT_LeftPadding = (MediaQuery.of(context).size.width/2)-(MediaQuery.of(context).size.width-(80*2))/2;
-      } else {
-
+        whiteBlueTextLeftPadding = (MediaQuery.of(context).size.width/2)-(MediaQuery.of(context).size.width-(80*2))/2;
       }
 
-      print(white_blue_TEXT_LeftPadding);
-      setState(() {
-
-      });
+      setState(() { });
 
     });
 
@@ -137,8 +123,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Row(
-                                  // mainAxisAlignment:MainAxisAlignment.center,
-                                  // crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Visibility(
                                       child:AnimatedSize(
@@ -148,8 +132,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                         child:Container(
                                           alignment:Alignment.centerRight,
                                           // color:Colors.white,
-                                          width:white_blue_TEXT_LeftPadding,
-                                          // MediaQuery.of(context).size.width-(MediaQuery.of(context).size.width-(80*2)),
+                                          width:whiteBlueTextLeftPadding,
                                           height:(MediaQuery.of(context).size.width-(80*2))*1.4,
                                         ),
                                       ),
@@ -184,9 +167,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                       fit:BoxFit.fill,
                                     ),
                                   ),
-                                  onPressed:() {
-
-                                  },
+                                  onPressed:() { },
                                 ),
                                 isAnimated
                                     ? AnimatedSize(
@@ -194,9 +175,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                   vsync:this,
                                   duration:Duration(milliseconds:800),
                                   child:SizedBox(height:heightWatchEarn),
-                                )
-                                    :  SizedBox(height:10),
-
+                                ) :  SizedBox(height:10),
                                 Visibility(
                                   visible:!isAnimated,
                                   child:AnimatedSize(
@@ -207,7 +186,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                       'Watch & earn',
                                       style:TextStyle(
                                           color:Colors.white,
-                                          fontSize:size_Watch_Earn_Text,
+                                          fontSize: sizeWatchEarnText,
                                           fontFamily:'OpenSans',
                                           fontWeight:FontWeight.w100
                                       ),
@@ -220,7 +199,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                     'Watch & earn',
                                     style:TextStyle(
                                         color:Colors.white,
-                                        fontSize:size_Watch_Earn_Text,
+                                        fontSize: sizeWatchEarnText,
                                         fontFamily:'OpenSans',
                                         fontWeight:FontWeight.normal
                                     ),

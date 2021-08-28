@@ -25,8 +25,6 @@ import 'package:connectivity/connectivity.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_html/flutter_html.dart';
 import 'package:gami/Screens/NewsPost_Details.dart';
-import 'package:html/dom.dart' as dom;
-import 'package:flutter_html/flutter_html.dart';
 
 
 List<Map<String, dynamic>> arrNewsPosts = [];
@@ -37,8 +35,6 @@ class Tabbar extends StatefulWidget {
   _TabbarState createState() => _TabbarState();
 }
 
-double size_Watch_Earn_Text = 5;
-
 bool isAnimated = false;
 
 class _TabbarState extends State<Tabbar> with TickerProviderStateMixin {
@@ -47,9 +43,9 @@ class _TabbarState extends State<Tabbar> with TickerProviderStateMixin {
   int selectedIndex = 0;
   double heightWatchEarn = 300;
 
-  double white_blue_TEXT_LeftPadding = 0;
+  double whiteBlueTextLeftPadding = 0;
 
-  ScrollController _controller;
+  ScrollController controller;
 
   double widthBGFull = 0;
   double heightBGFull = 0;
@@ -61,25 +57,21 @@ class _TabbarState extends State<Tabbar> with TickerProviderStateMixin {
     'vz89473daa443d40f485',
     'vz89473daa443d40f485'
   ];
-  ProgressDialog _progressDialog;
-  bool _isInterstitialAdLoaded = false;
-  bool _isRewardedAdLoaded = false;
-  bool _isRewardedVideoComplete = false;
+
+  ProgressDialog progressDialog;
+  bool isInterstitialAdLoaded = false;
+  bool isRewardedAdLoaded = false;
+  bool isRewardedVideoComplete = false;
   GlobalKey<ScaffoldState> scaffoldState = GlobalKey();
   AdmobBannerSize bannerSize;
   AdmobInterstitial interstitialAd;
   AdmobReward rewardAd;
-  ScrollController _controllerFirst;
+  ScrollController controllerFirst;
 
   bool isFacebook = false;
   bool isAddColony = false;
   Map<String, dynamic> dictUserDetails = {};
   List<Map<String, dynamic>> arrInvitedList = [];
-
-
-  var facebookFlag = "0";
-  var addColonyFlag = "1";
-  var googleFlag = "2";
 
   var first = 0;
   var strUserName = "";
@@ -96,7 +88,7 @@ InterstitialAd _interstitialAd;
     nonPersonalizedAds: true,);
   */
 
-  Widget _currentAd = SizedBox(
+  Widget currentAd = SizedBox(
     width: 0.0,
     height: 0.0,
   );
@@ -132,15 +124,15 @@ InterstitialAd _interstitialAd;
 
     _loadInterstitialAd();
     _loadRewardedVideoAd();
-    _controller = ScrollController();
-    _controllerFirst = ScrollController();
+    controller = ScrollController();
+    controllerFirst = ScrollController();
 
     Future.delayed(Duration(microseconds:60),() {
       getUserData();
-      getInvitedList();
-      if (arrNewsPosts.length == 0) {
-        getNewsPosts(context);
-      }
+
+      // if (arrNewsPosts.length == 0) {
+      //   getNewsPosts(context);
+      // }
 
       widthBGFull = MediaQuery.of(context).size.width;
       heightBGFull = MediaQuery.of(context).size.height;
@@ -149,7 +141,7 @@ InterstitialAd _interstitialAd;
     Future.delayed(Duration(seconds:1),() {
       homeShowAnimation();
 
-      _controller.animateTo(250,
+      controller.animateTo(250,
           curve: Curves.linear, duration: Duration(milliseconds: 500)
       );
 
@@ -160,30 +152,27 @@ InterstitialAd _interstitialAd;
 
   }
 
-
-
   listener(AdColonyAdListener event) {
     if (event == AdColonyAdListener.onRequestFilled) AdColony.show().then((value) {
 
     }).catchError((error) {
       shwoError(context, error.message.toString());
     });
-    _progressDialog.dismiss();
+    progressDialog.dismiss();
   }
 
   void _loadInterstitialAd() {
     FacebookInterstitialAd.loadInterstitialAd(
       placementId: "IMG_16_9_APP_INSTALL#1192856601187343_1192857274520609",
       listener: (result, value) {
-        print("Interstitial Ad: $result --> $value");
         if (result == InterstitialAdResult.LOADED)
-          _isInterstitialAdLoaded = true;
+          isInterstitialAdLoaded = true;
 
         /// Once an Interstitial Ad has been dismissed and becomes invalidated,
         /// load a fresh Ad by calling this function.
         if (result == InterstitialAdResult.DISMISSED &&
             value["invalidated"] == true) {
-          _isInterstitialAdLoaded = false;
+          isInterstitialAdLoaded = false;
           _loadInterstitialAd();
         }
       },
@@ -195,34 +184,31 @@ InterstitialAd _interstitialAd;
       placementId: "IMG_16_9_APP_INSTALL#1192856601187343_1192857274520609",
       listener: (result, value) {
         print("Rewarded Ad: $result --> $value");
-        if (result == RewardedVideoAdResult.LOADED) _isRewardedAdLoaded = true;
+        if (result == RewardedVideoAdResult.LOADED) isRewardedAdLoaded = true;
         if (result == RewardedVideoAdResult.VIDEO_COMPLETE)
-          _isRewardedVideoComplete = true;
-
-        /// Once a Rewarded Ad has been closed and becomes invalidated,
-        /// load a fresh Ad by calling this function.
+          isRewardedVideoComplete = true;
         if (result == RewardedVideoAdResult.VIDEO_CLOSED &&
             value["invalidated"] == true) {
-          _isRewardedAdLoaded = false;
+          isRewardedAdLoaded = false;
           _loadRewardedVideoAd();
         }
       },
     );
   }
 
-  _showInterstitialAd() {
-    if (_isInterstitialAdLoaded == true)
-      FacebookInterstitialAd.showInterstitialAd();
-    else
-      print("Interstial Ad not yet loaded!");
-  }
+  // _showInterstitialAd() {
+  //   if (isInterstitialAdLoaded == true)
+  //     FacebookInterstitialAd.showInterstitialAd();
+  //   else
+  //     print("Interstial Ad not yet loaded!");
+  // }
 
   homeShowAnimation() {
     Future.delayed(Duration(microseconds:5),() {
-      white_blue_TEXT_LeftPadding = (MediaQuery.of(context).size.width/2)-(MediaQuery.of(context).size.width-(80*2))/2;
+      whiteBlueTextLeftPadding = (MediaQuery.of(context).size.width/2)-(MediaQuery.of(context).size.width-(80*2))/2;
       
       if (!isAnimated) {
-        size_Watch_Earn_Text = 20;
+        sizeWatchEarnText = 20;
 
         Future.delayed(Duration(seconds:1),() {
           isAnimated = true;
@@ -242,7 +228,7 @@ InterstitialAd _interstitialAd;
 
     Future.delayed(Duration(milliseconds:50),() {
       if (isAnimated) {
-        white_blue_TEXT_LeftPadding = (MediaQuery.of(context).size.width/2)-(MediaQuery.of(context).size.width-(80*2))/2;
+        whiteBlueTextLeftPadding = (MediaQuery.of(context).size.width/2)-(MediaQuery.of(context).size.width-(80*2))/2;
       }
 
       setState(() {
@@ -254,8 +240,8 @@ InterstitialAd _interstitialAd;
 
   homeHideAnimation() {
     heightWatchEarn = 400;
-    // white_blue_TEXT_LeftPadding = 430;
-    white_blue_TEXT_LeftPadding = MediaQuery.of(context).size.width;
+    whiteBlueTextLeftPadding = MediaQuery.of(context).size.width;
+
     setState(() {
 
     });
@@ -264,18 +250,11 @@ InterstitialAd _interstitialAd;
 
 
   getUserData() {
-    final userDetails = FirebaseAuth.instance.currentUser;
-    print('userDetailsuserDetailsuserDetailsuserDetailsuserDetails');
-    print(userDetails.phoneNumber);
-    print(strMobileNumber);
-
     try {
       FirebaseFirestore.instance.collection(tblUserDetails)
           .doc(strMobileNumber).get()
           .then((value) {
-        // dismissLoading(context);
         dictUserDetails = value.data();
-        print(dictUserDetails);
 
         strInvitationCode = dictUserDetails[kInvitationCode];
         strMobileNumber = dictUserDetails[kMobileNumber];
@@ -284,6 +263,8 @@ InterstitialAd _interstitialAd;
         rewardEarnings = (dictUserDetails[kRewardEarnings] == null)
             ? '0'
             : dictUserDetails[kRewardEarnings];
+
+        getInvitedList();
 
         setState(() {
 
@@ -295,24 +276,19 @@ InterstitialAd _interstitialAd;
   }
 
   getInvitedList() async {
-    // Get Intvited list from here
-    final currentUser = FirebaseAuth.instance.currentUser;
     final messages= await FirebaseFirestore.instance.collection(tblInvitedList)
-        .doc(strInvitatedCodeUsed)
-        .collection(currentUser.uid)
-        .get();
+        .doc(strInvitationCode)
+        .collection(strInvitationCode).get();
+
     arrInvitedList = messages.docs.map((docInMapFormat) {
       return docInMapFormat.data();
     }).toList();
-    // Get Intvited list to here
   }
 
   updateRewardPoint() {
     var intRewardEarnings = int.parse(rewardEarnings);
     intRewardEarnings += 1;
     try {
-      var userDetails = FirebaseAuth.instance.currentUser;
-
       FirebaseFirestore.instance
           .collection(tblUserDetails)
           .doc(strMobileNumber)
@@ -329,18 +305,23 @@ InterstitialAd _interstitialAd;
 
     if (connectivityResult == ConnectivityResult.mobile
         || connectivityResult == ConnectivityResult.wifi) {
-      showLoading(context);
-      final response = await http.get(Uri.parse(wordPress_API));
-      dismissLoading(context);
+      try {
+        showLoading(context);
+        final response = await http.get(Uri.parse(wordPressAPI));
+        dismissLoading(context);
 
-      if (response.statusCode == 200) {
-        arrNewsPosts = List<Map<String, dynamic>>.from(jsonDecode(response.body));
+        if (response.statusCode == 200) {
+          arrNewsPosts = List<Map<String, dynamic>>.from(jsonDecode(response.body));
 
-        setState(() {
+          setState(() {
 
-        });
-      } else {
-        throw Exception('Failed to load album');
+          });
+        } else {
+          throw Exception('Failed to load album');
+        }
+      } catch (error) {
+        dismissLoading(context);
+        shwoError(context, error.toString());
       }
     } else {
       shwoError(context, 'Check you internet connection.');
@@ -378,7 +359,7 @@ InterstitialAd _interstitialAd;
                                 height:MediaQuery.of(context).size.height,
                                 child:SingleChildScrollView(
                                   scrollDirection:Axis.horizontal,
-                                  controller: _controller,
+                                  controller: controller,
                                   physics:NeverScrollableScrollPhysics(),
                                   child:Row(
                                     children: [
@@ -459,7 +440,7 @@ InterstitialAd _interstitialAd;
                                               duration:Duration(milliseconds:600),
                                               child:Container(
                                                 alignment:Alignment.centerRight,
-                                                width:white_blue_TEXT_LeftPadding,
+                                                width: whiteBlueTextLeftPadding,
                                                 height:(MediaQuery.of(context).size.width-(80*2))*1.4,
                                               ),
                                             ),
@@ -563,7 +544,7 @@ InterstitialAd _interstitialAd;
                                             'Watch & Earn',
                                             style:TextStyle(
                                                 color:Colors.white,
-                                                fontSize:size_Watch_Earn_Text,
+                                                fontSize: sizeWatchEarnText,
                                                 fontFamily:'OpenSans',
                                                 fontWeight:FontWeight.w100
                                             ),
@@ -576,7 +557,7 @@ InterstitialAd _interstitialAd;
                                           'Watch & Earn',
                                           style:TextStyle(
                                               color:Colors.white,
-                                              fontSize:size_Watch_Earn_Text,
+                                              fontSize: sizeWatchEarnText,
                                               fontFamily:'OpenSans',
                                               fontWeight:FontWeight.normal
                                           ),
@@ -604,7 +585,7 @@ InterstitialAd _interstitialAd;
                             )
                         ),
                         //SHARE SCREEN
-                        ShareScreen(selectedIndex,strInvitationCode),
+                        ShareScreen(selectedIndex, strInvitationCode),
                         //PROFILE SCREEN
                         ProfileScreen(selectedIndex, strUserName, strMobileNumber, arrInvitedList),
                         //Mining SCREEN
@@ -641,20 +622,12 @@ InterstitialAd _interstitialAd;
                                               borderRadius: BorderRadius.circular(4),
                                               child: Image.network(
                                                   getImage(arrNewsPosts[index])
-                                                // 'https://gami.me/wp-content/uploads/'+Map<String, dynamic>.from(arrNewsPosts[index]['media_details'])['file'],
                                               )
 
-                                            // Image.asset(
-                                            //   'assets/images/NewsImage.jpeg',
-                                            //   width:MediaQuery.of(context).size.width,
-                                            //   //height:90,
-                                            //   fit: BoxFit.fitWidth,
-                                            // ),
                                           ),
                                           SizedBox(height:10,),
                                           Text(
                                             Map<String, dynamic>.from(arrNewsPosts[index]['title'])["rendered"],
-                                            // textAlign:TextAlign.center,
                                             style:TextStyle(
                                                 color:Colors.white,
                                                 fontSize:20,
@@ -664,25 +637,13 @@ InterstitialAd _interstitialAd;
                                           ),
                                           // SizedBox(height:10,),
                                           Html(
-                                            data: Map<String, dynamic>.from(arrNewsPosts[index]['content'])["rendered"],
+                                            data: Map<String, dynamic>.from(arrNewsPosts[index]['excerpt'])["rendered"],
                                             defaultTextStyle: TextStyle(
                                                 color:Colors.white,
                                                 fontSize:12,
                                                 fontFamily:'OpenSans',
                                                 fontWeight:FontWeight.normal
                                             ),
-                                            // padding: EdgeInsets.all(8.0),
-                                            // onLinkTap: (url) {
-                                            //   print("Opening $url...");
-                                            // },
-                                            // customRender: (node, children) {
-                                            //   if (node is dom.Element) {
-                                            //     switch (node.localName) {
-                                            //       case "custom_tag": // using this, you can handle custom tags in your HTML
-                                            //         return Column(children: children);
-                                            //     }
-                                            //   }
-                                            // },
                                           ),
                                         ],
                                       ),
@@ -690,7 +651,7 @@ InterstitialAd _interstitialAd;
                                     onPressed: () {
                                       Navigator.push(
                                         context,
-                                        MaterialPageRoute(builder: (context) => NewsPost_Details(arrNewsPosts[index])),
+                                        MaterialPageRoute(builder: (context) => NewsPostDetails(arrNewsPosts[index])),
                                       );
                                     },
                                   );
@@ -703,10 +664,6 @@ InterstitialAd _interstitialAd;
                   ],
                 ),
               ),
-
-
-
-              //NOTE: Navigation Bar
               Align(
                   alignment: Alignment.bottomCenter,
                   child:Container(
@@ -804,15 +761,7 @@ InterstitialAd _interstitialAd;
           height: height,
         ),
         onPressed: () {
-          print('strInvitationCodestrInvitationCodestrInvitationCodestrInvitationCodestrInvitationCodeonCode');
-          print(strInvitationCode);
-
           selectedIndex = index;
-
-          // _controllerFirst.animateTo(
-          //     0,
-          //     curve: Curves.linear, duration: Duration(milliseconds:100)
-          // );
 
           if (selectedIndex == 0) {
             widthBGFull = MediaQuery.of(context).size.width;
@@ -820,19 +769,18 @@ InterstitialAd _interstitialAd;
             zoomScale = 1;
 
             homeShowAnimation();
-            _controller.animateTo(
+            controller.animateTo(
                 250,
                 curve:Curves.linear, duration: Duration(milliseconds: 500)
             );
-          }
-          else if (selectedIndex == 1) {
+          } else if (selectedIndex == 1) {
             widthBGFull = MediaQuery.of(context).size.width;
             heightBGFull = MediaQuery.of(context).size.height;
             zoomScale = 1;
 
             homeHideAnimation();
-            _controller.animateTo(
-                _controller.position.maxScrollExtent,
+            controller.animateTo(
+                controller.position.maxScrollExtent,
                 curve: Curves.linear, duration: Duration(milliseconds: 500)
             );
           }
@@ -842,7 +790,7 @@ InterstitialAd _interstitialAd;
             zoomScale = 1;
 
             homeHideAnimation();
-            _controller.animateTo(
+            controller.animateTo(
                 400,
                 curve: Curves.linear, duration: Duration(milliseconds: 500)
             );
@@ -853,7 +801,7 @@ InterstitialAd _interstitialAd;
             zoomScale = 1;
 
             homeHideAnimation();
-            _controller.animateTo(
+            controller.animateTo(
                 400,
                 curve: Curves.linear, duration: Duration(milliseconds: 500)
             );
@@ -864,7 +812,7 @@ InterstitialAd _interstitialAd;
             zoomScale = 1;
 
             homeHideAnimation();
-            _controller.animateTo(
+            controller.animateTo(
                 0,
                 curve: Curves.linear, duration: Duration(milliseconds: 500)
             );
@@ -892,9 +840,6 @@ InterstitialAd _interstitialAd;
           semanticLabel: 'Mining',
         ),
         onPressed: () {
-
-
-
           Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
               TimerScreen()), (Route<dynamic> route) => false);
         },
@@ -907,7 +852,6 @@ InterstitialAd _interstitialAd;
       decoration: BoxDecoration(
         color: Colors.transparent,
       ),
-      // alignment:Alignment.centerLeft,
       child: TextButton(
         child: Text(
           text,
@@ -918,6 +862,9 @@ InterstitialAd _interstitialAd;
               fontWeight: FontWeight.bold
           ),
         ),
+        onPressed: () {
+
+        },
       ),
     );
   }
@@ -952,5 +899,4 @@ String getRewardBasedVideoAdUnitId() {
   }
   return null;
 }
-
 

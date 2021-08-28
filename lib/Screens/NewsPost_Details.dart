@@ -2,29 +2,20 @@
 import 'package:flutter/material.dart';
 import 'package:gami/Constant/Constant.dart';
 import 'package:gami/Global/Global.dart';
-import 'package:html/dom.dart' as dom;
 import 'package:flutter_html/flutter_html.dart';
 
-// class NewsPost_Details extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container();
-//   }
-// }
-
-
-class NewsPost_Details extends StatefulWidget {
+class NewsPostDetails extends StatefulWidget {
   Map<String, dynamic> dictNewsPosts = {
 
   };
 
-  NewsPost_Details(this.dictNewsPosts);
+  NewsPostDetails(this.dictNewsPosts);
 
   @override
-  _NewsPost_DetailsState createState() => _NewsPost_DetailsState();
+  _NewsPostDetailsState createState() => _NewsPostDetailsState();
 }
 
-class _NewsPost_DetailsState extends State<NewsPost_Details> {
+class _NewsPostDetailsState extends State<NewsPostDetails> {
 
 
 
@@ -47,8 +38,8 @@ class _NewsPost_DetailsState extends State<NewsPost_Details> {
                     borderRadius: BorderRadius.circular(4),
                     child: Image.network(
                       getImage(widget.dictNewsPosts),
-                      height: 340,
-                      fit: BoxFit.fill,
+                      // height: 340,
+                      // fit: BoxFit.cover,
                       // 'https://gami.me/wp-content/uploads/'+Map<String, dynamic>.from(arrNewsPosts[index]['media_details'])['file'],
                     )
                 ),

@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
-import 'package:gami/Constant/Auth.dart';
 import 'package:gami/Constant/Constant.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -22,7 +21,7 @@ class Login extends StatefulWidget {
 
 
 class _LoginState extends State<Login> {
-  var _isLoggedIn = false;
+  // var _isLoggedIn = false;
   var txtEmailAddress = TextEditingController();
   var txtPassword = TextEditingController();
   final GoogleSignIn googleSignIn = GoogleSignIn(scopes: [
@@ -193,7 +192,7 @@ class _LoginState extends State<Login> {
                                   height:30,
                                 ),
                                 onPressed:() async {
-                                  authUser();
+                                  // authUser();
 
                                 },
                               )
@@ -251,20 +250,20 @@ class _LoginState extends State<Login> {
     );
   }
 
-  void authUser() async {
-    try {
-      await Auth().signOutGoogle();
-      await Auth().signInWithGoogle(context).then((user) {
-        if (user != null) {
-
-        } else {
-
-        }
-      });
-    } catch (e) {
-      print(e);
-    }
-  }
+  // void authUser() async {
+  //   try {
+  //     await Auth().signOutGoogle();
+  //     await Auth().signInWithGoogle(context).then((user) {
+  //       if (user != null) {
+  //
+  //       } else {
+  //
+  //       }
+  //     });
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
   loginWithFB() async {
     _logout();
     facebookLogin.loginBehavior = FacebookLoginBehavior.webViewOnly;
@@ -279,18 +278,23 @@ class _LoginState extends State<Login> {
         socailUserSetData(context, credential);
         break;
       case FacebookLoginStatus.cancelledByUser:
-        setState(() => _isLoggedIn = false);
+        setState(() {
+          // _isLoggedIn = false
+        });
         break;
       case FacebookLoginStatus.error:
-        setState(() => _isLoggedIn = false);
+        setState(() {
+          // _isLoggedIn = false
+        });
         break;
     }
   }
 
   void _logout() {
     facebookLogin.logOut();
+
     setState(() {
-      _isLoggedIn = false;
+      // _isLoggedIn = false;
     });
   }
 }
