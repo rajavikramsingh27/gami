@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/granzax/Downloads/gami-Hashim 2/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+            "outputFile": "/Users/granzax/Projects/Flutter/gami/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
             "map": [
                 {
                     "source": "/Users/granzax/.gradle/caches/transforms-2/files-2.1/652594012736ff132d8b9d9f1e4638f8/core-1.3.2/res/values/values.xml",
@@ -39,6 +39,23 @@
                         "endLines": "2229,2236,2247,3445,3450",
                         "endColumns": "24,24,24,24,24",
                         "endOffsets": "150131,150516,151113,214765,215035"
+                    }
+                },
+                {
+                    "source": "/Users/granzax/Projects/Flutter/gami/build/app/generated/res/google-services/debug/values/values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,199,281,385,494,614,708",
+                        "endColumns": "143,81,103,108,119,93,70",
+                        "endOffsets": "194,276,380,489,609,703,774"
+                    },
+                    "to": {
+                        "startLines": "384,388,389,390,391,392,408",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "27305,27662,27744,27848,27957,28077,29644",
+                        "endColumns": "143,81,103,108,119,93,70",
+                        "endOffsets": "27444,27739,27843,27952,28072,28166,29710"
                     }
                 },
                 {
@@ -111,6 +128,25 @@
                         "endLines": "2,38,39,40,41,190,191,192,450,1500,1503,1506,2818",
                         "endColumns": "51,60,61,61,63,58,56,53,12,12,12,12,24",
                         "endOffsets": "197,2692,2754,2816,2880,13167,13224,13278,32497,100091,100217,100345,181713"
+                    }
+                },
+                {
+                    "source": "/Users/granzax/Projects/Flutter/gami/android/app/src/main/res/values/styles.xml",
+                    "from": {
+                        "startLines": "18,19,20,3,14",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "986,1045,1105,173,816",
+                        "endLines": "18,19,20,7,16",
+                        "endColumns": "58,59,70,12,12",
+                        "endOffsets": "1040,1100,1171,465,980"
+                    },
+                    "to": {
+                        "startLines": "342,385,386,1507,1570",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "22776,27449,27509,100350,103173",
+                        "endLines": "342,385,386,1511,1572",
+                        "endColumns": "58,59,70,12,12",
+                        "endOffsets": "22830,27504,27575,100642,103337"
                     }
                 },
                 {
@@ -262,23 +298,6 @@
                     }
                 },
                 {
-                    "source": "/Users/granzax/Downloads/gami-Hashim 2/build/app/generated/res/google-services/debug/values/values.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "55,199,281,385,494,614,708",
-                        "endColumns": "143,81,103,108,119,93,70",
-                        "endOffsets": "194,276,380,489,609,703,774"
-                    },
-                    "to": {
-                        "startLines": "384,388,389,390,391,392,408",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "27305,27662,27744,27848,27957,28077,29644",
-                        "endColumns": "143,81,103,108,119,93,70",
-                        "endOffsets": "27444,27739,27843,27952,28072,28166,29710"
-                    }
-                },
-                {
                     "source": "/Users/granzax/.gradle/caches/transforms-2/files-2.1/b7b642bf77cfffc0dfafa45b38a74be6/coordinatorlayout-1.0.0/res/values/values.xml",
                     "from": {
                         "startLines": "2,102,3,13",
@@ -331,25 +350,6 @@
                         "endLines": "1902,2192",
                         "endColumns": "8,20",
                         "endOffsets": "128786,147967"
-                    }
-                },
-                {
-                    "source": "/Users/granzax/Downloads/gami-Hashim 2/android/app/src/main/res/values/styles.xml",
-                    "from": {
-                        "startLines": "18,19,20,3,14",
-                        "startColumns": "4,4,4,4,4",
-                        "startOffsets": "986,1045,1105,173,816",
-                        "endLines": "18,19,20,7,16",
-                        "endColumns": "58,59,70,12,12",
-                        "endOffsets": "1040,1100,1171,465,980"
-                    },
-                    "to": {
-                        "startLines": "342,385,386,1507,1570",
-                        "startColumns": "4,4,4,4,4",
-                        "startOffsets": "22776,27449,27509,100350,103173",
-                        "endLines": "342,385,386,1511,1572",
-                        "endColumns": "58,59,70,12,12",
-                        "endOffsets": "22830,27504,27575,100642,103337"
                     }
                 }
             ]

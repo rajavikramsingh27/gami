@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/granzax/Downloads/gami-Hashim 2/build/url_launcher/intermediates/res/merged/debug/values-kk/values-kk.xml",
+            "outputFile": "/Users/granzax/Projects/Flutter/gami/build/url_launcher/intermediates/res/merged/debug/values-kk/values-kk.xml",
             "map": [
                 {
                     "source": "/Users/granzax/.gradle/caches/transforms-2/files-2.1/14699412ade7bddac0f439f0ad328366/core-1.1.0/res/values-kk/values-kk.xml",
@@ -16,7 +16,7 @@
             ]
         },
         {
-            "outputFile": "/Users/granzax/Downloads/gami-Hashim 2/build/url_launcher/intermediates/incremental/mergeDebugResources/merged.dir/values-kk/values-kk.xml",
+            "outputFile": "/Users/granzax/Projects/Flutter/gami/build/url_launcher/intermediates/incremental/mergeDebugResources/merged.dir/values-kk/values-kk.xml",
             "map": [
                 {
                     "source": "/Users/granzax/.gradle/caches/transforms-2/files-2.1/14699412ade7bddac0f439f0ad328366/core-1.1.0/res/values-kk/values-kk.xml",
