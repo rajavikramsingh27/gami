@@ -1,5 +1,6 @@
 
 
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:gami/Constant/Constant.dart';
 import 'package:gami/Screens/OnboardingScreen.dart';
@@ -31,6 +32,22 @@ extension EmailValidator on String {
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
         .hasMatch(this);
   }
+}
+
+showError(context,String message) {
+  ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor:Colors.red,
+        content:Text(
+          message,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              color:Colors.white,
+              fontSize: 18
+          ),
+        ),
+      )
+  );
 }
 
 void showLoading(BuildContext context) {
@@ -142,4 +159,32 @@ String getImage(Map<String,dynamic> _embedded) {
   }
 }
 
+
+
+String getBannerAdUnitId() {
+  if (Platform.isIOS) {
+    return 'ca-app-pub-3940256099942544/2934735716';
+  } else if (Platform.isAndroid) {
+    return 'ca-app-pub-3940256099942544/6300978111';
+  }
+  return null;
+}
+
+String getInterstitialAdUnitId() {
+  if (Platform.isIOS) {
+    return 'ca-app-pub-3940256099942544/4411468910';
+  } else if (Platform.isAndroid) {
+    return 'ca-app-pub-3940256099942544/1033173712';
+  }
+  return null;
+}
+
+String getRewardBasedVideoAdUnitId() {
+  if (Platform.isIOS) {
+    return 'ca-app-pub-3940256099942544/1712485313';
+  } else if (Platform.isAndroid) {
+    return 'ca-app-pub-3940256099942544/5224354917';
+  }
+  return null;
+}
 

@@ -63,6 +63,8 @@ dependencies:
   connectivity:
   country_codes:
   flutter_html: ^0.8.2
+  url_launcher:
+  package_info: ^0.4.0+16
 
 dev_dependencies:
   flutter_launcher_icons: "^0.8.0"
@@ -134,6 +136,9 @@ flutter:
     - assets/images/loader.png
     - assets/images/bgFull.png
     - assets/videos/Adv1-epic.mp4
+    - assets/images/attentionTransaction.svg
+    - assets/images/inviteTransaction.svg
+    - assets/images/miningTransaction.svg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

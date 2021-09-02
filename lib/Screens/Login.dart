@@ -1,3 +1,4 @@
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -156,11 +157,11 @@ class _LoginState extends State<Login> {
                             ),
                             onPressed:() {
                               if (txtEmailAddress.text.isEmpty) {
-                                shwoError(context, 'Enter your email.');
+                                showError(context, 'Enter your email.');
                               } else if (!txtEmailAddress.text.isValidEmail()) {
-                                shwoError(context, 'Enter a valid email.');
+                                showError(context, 'Enter a valid email.');
                               } else if (txtPassword.text.isEmpty) {
-                                shwoError(context, 'Enter your password.');
+                                showError(context, 'Enter your password.');
                               } else {
                                 signInWithEmailAndPassword(
                                     context,

@@ -19,6 +19,7 @@ MERGED from [:country_codes] /Users/granzax/Projects/Flutter/gami/build/country_
 MERGED from [:firebase_auth] /Users/granzax/Projects/Flutter/gami/build/firebase_auth/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-15:12
 MERGED from [:adcolony] /Users/granzax/Projects/Flutter/gami/build/adcolony/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-25:12
 MERGED from [:firebase_storage] /Users/granzax/Projects/Flutter/gami/build/firebase_storage/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-15:12
+MERGED from [:package_info] /Users/granzax/Projects/Flutter/gami/build/package_info/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [:contacts_service] /Users/granzax/Projects/Flutter/gami/build/contacts_service/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:permission_handler] /Users/granzax/Projects/Flutter/gami/build/permission_handler/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [:app_settings] /Users/granzax/Projects/Flutter/gami/build/app_settings/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
@@ -525,6 +526,8 @@ MERGED from [:adcolony] /Users/granzax/Projects/Flutter/gami/build/adcolony/inte
 MERGED from [:adcolony] /Users/granzax/Projects/Flutter/gami/build/adcolony/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:firebase_storage] /Users/granzax/Projects/Flutter/gami/build/firebase_storage/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:firebase_storage] /Users/granzax/Projects/Flutter/gami/build/firebase_storage/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:package_info] /Users/granzax/Projects/Flutter/gami/build/package_info/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:package_info] /Users/granzax/Projects/Flutter/gami/build/package_info/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:contacts_service] /Users/granzax/Projects/Flutter/gami/build/contacts_service/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:contacts_service] /Users/granzax/Projects/Flutter/gami/build/contacts_service/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:permission_handler] /Users/granzax/Projects/Flutter/gami/build/permission_handler/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44

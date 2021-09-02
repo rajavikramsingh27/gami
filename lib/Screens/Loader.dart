@@ -5,7 +5,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gami/Constant/Constant.dart';
 import 'package:gami/Global/Global.dart';
 import 'package:gami/Screens/Tabbar.dart';
-import 'package:gami/Global/AppUserAuth.dart';
 import 'dart:async';
 import 'package:connectivity/connectivity.dart';
 import 'package:http/http.dart' as http;
@@ -60,7 +59,7 @@ class _LoaderState extends State<Loader> with TickerProviderStateMixin {
         throw Exception('Failed to load album');
       }
     } else {
-      shwoError(context, 'Check you internet connection.');
+      showError(context, 'Check you internet connection.');
     }
 
   }

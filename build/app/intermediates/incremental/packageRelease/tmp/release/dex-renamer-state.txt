@@ -1,0 +1,7 @@
+#Thu Sep 02 23:36:00 IST 2021
+base.0=/Users/granzax/Projects/Flutter/gami/build/app/intermediates/dex/release/shrunkDex/classes.dex
+path.1=classes2.dex
+renamed.1=classes2.dex
+path.0=classes.dex
+renamed.0=classes.dex
+base.1=/Users/granzax/Projects/Flutter/gami/build/app/intermediates/dex/release/shrunkDex/classes2.dex

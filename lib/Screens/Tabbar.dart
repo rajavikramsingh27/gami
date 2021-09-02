@@ -1,13 +1,14 @@
 
 
+
 import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gami/Screens/ProfileScreen.dart';
 import 'package:gami/Screens/ShareScreen.dart';
 import 'package:gami/Screens/TimerScreen.dart';
 import 'package:gami/Global/Global.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Constant/Constant.dart';
 
 import '../Global/Global.dart';
@@ -16,8 +17,6 @@ import 'package:adcolony/adcolony.dart';
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:facebook_audience_network/facebook_audience_network.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:gami/Global/AppUserAuth.dart';
 import 'package:gami/Screens/progress_dialog.dart';
 import 'package:gami/Constant/Constant.dart';
 import 'dart:async';
@@ -25,10 +24,15 @@ import 'package:connectivity/connectivity.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_html/flutter_html.dart';
 import 'package:gami/Screens/NewsPost_Details.dart';
+import 'package:package_info/package_info.dart';
+import 'package:gami/Screens/CheckVersion.dart';
+import 'package:gami/Global/AppUserAuth.dart';
+import 'package:gami/Screens/Transactions.dart';
+import 'package:dart_notification_center/dart_notification_center.dart';
+import 'package:intl/intl.dart';
 
 
 List<Map<String, dynamic>> arrNewsPosts = [];
-
 
 class Tabbar extends StatefulWidget {
   @override
@@ -69,13 +73,25 @@ class _TabbarState extends State<Tabbar> with TickerProviderStateMixin {
   ScrollController controllerFirst;
 
   bool isFacebook = false;
-  bool isAddColony = false;
+  // bool isAddColony = false;
+  String strAdvertTypeToShow = '0';
+
   Map<String, dynamic> dictUserDetails = {};
   List<Map<String, dynamic>> arrInvitedList = [];
+
+  String strIsAdverts = '0';
 
   var first = 0;
   var strUserName = "";
 
+  String strAdsType = '';
+
+  var dictAdsCount = {
+    'first':'0',
+    'dayAdsCount': '0',
+    'hour': '0',
+    'day': '0'
+  };
 
 /*
 
@@ -93,12 +109,92 @@ InterstitialAd _interstitialAd;
     height: 0.0,
   );
 
+  checkAdsCount() async {
+    final now = DateTime.now();
+    final sharedPref = await SharedPreferences.getInstance();
+
+    final strAdsCount = (sharedPref.getString('adsCount') ?? '');
+
+    dictAdsCount = strAdsCount.isEmpty
+        ? dictAdsCount
+        : Map<String, String>.of(jsonDecode(strAdsCount));
+
+    print('strTimestrTimestrTimestrTimestrTimestrTimestrTime');
+    print(dictAdsCount['day']);
+    print(dictAdsCount['hour']);
+
+    if (now.hour.toString() != dictAdsCount['hour']) {
+      dictAdsCount['hour'] = now.hour.toString();
+
+      dictAdsCount['first'] = '0';
+    }
+
+    if (now.day.toString() != dictAdsCount['day']) {
+      dictAdsCount['day'] = now.day.toString();
+      dictAdsCount['hour'] = '0';
+
+      dictAdsCount['first'] = '0';
+    }
+
+    sharedPref.setString('adsCount', jsonEncode(dictAdsCount));
+  }
+
+  String strTotal = '0';
+  String strMaxAdvertsInDay = '5';
+  String strMaxAdvertsInHour = '20';
+  
+  getGlobalSettingForTabbar() async {
+    final snapShot = await FirebaseFirestore.instance.collection(tblGlobalSettings).get();
+    final arrGlobalSettings = snapShot.docs.map((doc) => doc.data()).toList();
+    
+    strMaxAdvertsInDay = arrGlobalSettings[0]['maxAdvertsInDay'].toString();
+    strMaxAdvertsInHour = arrGlobalSettings[0]['maxAdvertsInHour'].toString();
+    
+    setState(() {
+      
+    });
+  }
+
+  getTransactionList() async {
+    strTotal = '0';
+
+    final querySnapShot = await FirebaseFirestore.instance
+        .collection(tblTransactions)
+        .doc(strInvitationCode)
+        .collection(strInvitationCode).get();
+
+    final arrTransactions = querySnapShot.docs.map((docInMapFormat) {
+      return docInMapFormat.data();
+    }).toList();
+
+    for (final dict in arrTransactions) {
+      final strAttention = int.parse(dict['attention'].toString());
+      final strInvite = int.parse(dict['invite'].toString());
+      final strMining = int.parse(dict['mining'].toString());
+
+      strTotal = (int.parse(strTotal)+strAttention+strInvite+strMining).toString();
+    }
+
+    setState(() {
+
+    });
+
+    Future.delayed(Duration(milliseconds: 40), () {
+      getGlobalSettingForTabbar();
+    });
+  }
 
   @override
   void initState() {
     WidgetsFlutterBinding.ensureInitialized();
     Admob.initialize();
     super.initState();
+
+    DartNotificationCenter.subscribe(
+      channel: tblTransactions,
+      observer: '0',
+      onNotification: (result) => getTransactionList(),
+    );
 
     AdColony.init(AdColonyOptions('app8e401cbe7abd4efb9c', '0', this.zones));
 
@@ -118,6 +214,7 @@ InterstitialAd _interstitialAd;
 
     interstitialAd.load();
     rewardAd.load();
+
     FacebookAudienceNetwork.init(
       testingId: "35e92a63-8102-46a4-b0f5-4fd269e6a13c",
     );
@@ -129,10 +226,11 @@ InterstitialAd _interstitialAd;
 
     Future.delayed(Duration(microseconds:60),() {
       getUserData();
+      checkAdsCount();
 
-      // if (arrNewsPosts.length == 0) {
-      //   getNewsPosts(context);
-      // }
+      if (arrNewsPosts.length == 0) {
+        getNewsPosts(context);
+      }
 
       widthBGFull = MediaQuery.of(context).size.width;
       heightBGFull = MediaQuery.of(context).size.height;
@@ -140,9 +238,10 @@ InterstitialAd _interstitialAd;
 
     Future.delayed(Duration(seconds:1),() {
       homeShowAnimation();
+      checkVersion();
 
       controller.animateTo(250,
-          curve: Curves.linear, duration: Duration(milliseconds: 500)
+          curve: Curves.linear, duration: Duration(seconds:1)
       );
 
       setState(() {
@@ -150,13 +249,44 @@ InterstitialAd _interstitialAd;
       });
     });
 
+    Future.delayed(Duration(seconds:1),() {
+      getTransactionList();
+    });
+
+  }
+
+  checkVersion() {
+    PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
+
+      Future.delayed(Duration(seconds:1),() {
+        final arrMinVersion = dictAppDetails['minVersion'].toString().split('.');
+        final arrPackageInfoVersion = packageInfo.version.toString().split('.');
+
+        if (int.parse(arrMinVersion[0]) > int.parse(arrPackageInfoVersion[0])) {
+          if (dictAppDetails['minVersion'].toString() != packageInfo.version) {
+            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                CheckVersion()), (Route<dynamic> route) => false);
+          }
+        } else if (int.parse(arrMinVersion[1]) > int.parse(arrPackageInfoVersion[1])) {
+          if (dictAppDetails['minVersion'].toString() != packageInfo.version) {
+            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                CheckVersion()), (Route<dynamic> route) => false);
+          }
+        } else if (int.parse(arrMinVersion[2]) > int.parse(arrPackageInfoVersion[2])) {
+          if (dictAppDetails['minVersion'].toString() != packageInfo.version) {
+            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                CheckVersion()), (Route<dynamic> route) => false);
+          }
+        }
+      });
+    });
   }
 
   listener(AdColonyAdListener event) {
     if (event == AdColonyAdListener.onRequestFilled) AdColony.show().then((value) {
 
     }).catchError((error) {
-      shwoError(context, error.message.toString());
+      showError(context, error.message.toString());
     });
     progressDialog.dismiss();
   }
@@ -247,8 +377,6 @@ InterstitialAd _interstitialAd;
     });
   }
 
-
-
   getUserData() {
     try {
       FirebaseFirestore.instance.collection(tblUserDetails)
@@ -264,6 +392,8 @@ InterstitialAd _interstitialAd;
             ? '0'
             : dictUserDetails[kRewardEarnings];
 
+        strIsAdverts = dictUserDetails[kIsAdverts];
+
         getInvitedList();
 
         setState(() {
@@ -271,12 +401,12 @@ InterstitialAd _interstitialAd;
         });
       });
     } catch (error) {
-      shwoError(context, error.message.toString());
+      showError(context, error.message.toString());
     }
   }
 
   getInvitedList() async {
-    final messages= await FirebaseFirestore.instance.collection(tblInvitedList)
+    final messages = await FirebaseFirestore.instance.collection(tblInvitedList)
         .doc(strInvitationCode)
         .collection(strInvitationCode).get();
 
@@ -296,7 +426,7 @@ InterstitialAd _interstitialAd;
         kRewardEarnings: intRewardEarnings.toString(),
       }).then((value) {});
     } catch (error) {
-      shwoError(context, error.message.toString());
+      showError(context, error.message.toString());
     }
   }
 
@@ -321,10 +451,10 @@ InterstitialAd _interstitialAd;
         }
       } catch (error) {
         dismissLoading(context);
-        shwoError(context, error.toString());
+        showError(context, error.toString());
       }
     } else {
-      shwoError(context, 'Check you internet connection.');
+      showError(context, 'Check you internet connection.');
     }
 
   }
@@ -334,7 +464,7 @@ InterstitialAd _interstitialAd;
 
     return WillPopScope(
       onWillPop:() {
-        // Navigator.pop(context);
+        Navigator.pop(context);
         return;
       },
       child:Scaffold(
@@ -388,8 +518,6 @@ InterstitialAd _interstitialAd;
                               child:Column(
                                 children: [
                                   SizedBox(height:10,),
-                                  //NOTE:
-                                  //NOTE: Logo at the top of the screen
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
@@ -417,8 +545,6 @@ InterstitialAd _interstitialAd;
                                     ],
                                   ),
                                   SizedBox(height:35,),
-                                  //NOTE:
-                                  //Middle section with the animation
                                   Column(
                                     mainAxisAlignment:MainAxisAlignment.center,
                                     crossAxisAlignment:CrossAxisAlignment.center,
@@ -482,43 +608,61 @@ InterstitialAd _interstitialAd;
                                               width:MediaQuery.of(context).size.width/5,
                                               fit:BoxFit.fill,
                                             ),
-                                          ),
+                                          ), onPressed: () async {
 
-                                            onPressed: () async {
-                                              var connectivityResult = await (Connectivity().checkConnectivity());
+                                            if (strIsAdverts == '0') {
+                                              return;
+                                            }
+
+                                            final connectivityResult = await (Connectivity().checkConnectivity());
+                                              first = int.parse(dictAdsCount['first'].toString());
+                                              int dayAdsCount = int.parse(dictAdsCount['dayAdsCount'].toString());
+                                              
+                                              if (first > int.parse(strMaxAdvertsInHour)
+                                                  || dayAdsCount > int.parse(strMaxAdvertsInDay)) {
+                                                return;
+                                              }
 
                                               if (connectivityResult == ConnectivityResult.mobile
                                                   || connectivityResult == ConnectivityResult.wifi) {
-                                                if (first == 0) {
+                                                if (strAdvertTypeToShow == '0') {
                                                   setState(() {
-                                                    isAddColony = true;
+                                                    strAdvertTypeToShow = '1';
 
                                                     AdColony.request( this.zones[1], listener).then((value) {
-                                                      updateRewardPoint();
-                                                      getUserData();
-                                                      first = 1;
+                                                      final strDate = DateFormat('dd MMM yyyy').format(DateTime.now());
+                                                      getGlobalSettings(context, strInvitationCode, strDate, 'attention');
                                                     }).catchError((error) {
                                                       print(error.message.toString());
                                                     });
                                                   });
-                                                } else if (first == 1) {
+                                                } else if (strAdvertTypeToShow == '1') {
+                                                  strAdvertTypeToShow = '2';
+
                                                   setState(() {
                                                     FacebookInterstitialAd.showInterstitialAd().then((value) {
-                                                      updateRewardPoint();
-                                                      getUserData();
-                                                      first = 2;
+                                                      final strDate = DateFormat('dd MMM yyyy').format(DateTime.now());
+                                                      getGlobalSettings(context, strInvitationCode, strDate, 'attention');
                                                     }).catchError((error) {
 
                                                     });
                                                   });
-                                                } else if (first == 2) {
+                                                } else if (strAdvertTypeToShow == '2') {
+                                                  strAdvertTypeToShow = '0';
+
                                                   rewardAd.show();
-                                                  getUserData();
-                                                  updateRewardPoint();
-                                                  first = 0;
+                                                  final strDate = DateFormat('dd MMM yyyy').format(DateTime.now());
+                                                  getGlobalSettings(context, strInvitationCode, strDate, 'attention');
                                                 }
+
+                                                dictAdsCount['first'] = (first+1).toString();
+                                                dayAdsCount = dayAdsCount+1;
+                                                dictAdsCount['dayAdsCount'] = dayAdsCount.toString();
+
+                                                final sharedPref = await SharedPreferences.getInstance();
+                                                sharedPref.setString('adsCount', jsonEncode(dictAdsCount));
                                               } else  {
-                                                shwoError(context, 'Check you internet connection.');
+                                                showError(context, 'Check you internet connection.');
                                               }
 
                                             }
@@ -579,7 +723,6 @@ InterstitialAd _interstitialAd;
 
                                     ],
                                   ),
-
                                 ],
                               ),
                             )
@@ -728,7 +871,7 @@ InterstitialAd _interstitialAd;
                                 Container(
                                     alignment: Alignment.centerRight,
                                     child:navigationBottomText(
-                                        '\$ ' + rewardEarnings,
+                                        '\$ ' + strTotal,
                                         0,0
                                     )
                                 ),
@@ -840,8 +983,10 @@ InterstitialAd _interstitialAd;
           semanticLabel: 'Mining',
         ),
         onPressed: () {
-          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-              TimerScreen()), (Route<dynamic> route) => false);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => TimerScreen()),
+          );
         },
       ),
     );
@@ -863,7 +1008,10 @@ InterstitialAd _interstitialAd;
           ),
         ),
         onPressed: () {
-
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Transactions()),
+          );
         },
       ),
     );
@@ -871,32 +1019,4 @@ InterstitialAd _interstitialAd;
 
 }
 
-
-
-String getBannerAdUnitId() {
-  if (Platform.isIOS) {
-    return 'ca-app-pub-3940256099942544/2934735716';
-  } else if (Platform.isAndroid) {
-    return 'ca-app-pub-3940256099942544/6300978111';
-  }
-  return null;
-}
-
-String getInterstitialAdUnitId() {
-  if (Platform.isIOS) {
-    return 'ca-app-pub-3940256099942544/4411468910';
-  } else if (Platform.isAndroid) {
-    return 'ca-app-pub-3940256099942544/1033173712';
-  }
-  return null;
-}
-
-String getRewardBasedVideoAdUnitId() {
-  if (Platform.isIOS) {
-    return 'ca-app-pub-3940256099942544/1712485313';
-  } else if (Platform.isAndroid) {
-    return 'ca-app-pub-3940256099942544/5224354917';
-  }
-  return null;
-}
 

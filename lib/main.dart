@@ -13,6 +13,8 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:gami/Screens/OnboardingScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:gami/Constant/Constant.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:gami/Global/Global.dart';
 
 
 void main() {
@@ -33,6 +35,7 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
+
   final GlobalKey<NavigatorState> navigatorKey =
       new GlobalKey<NavigatorState>();
   FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
@@ -52,11 +55,15 @@ class MyAppState extends State<MyApp> {
         onSelectNotification: selectNotification);
     didCheckForNotificationPermission();
 
-    Future.delayed(Duration(seconds: 1), () async {
+    Future.delayed(Duration(microseconds: 100), () async {
+      getAppDetails();
 
       try {
         final sharedPref = await SharedPreferences.getInstance();
         final savedMobileNumber = sharedPref.get(kMobileNumber).toString();
+
+        print('savedMobileNumbersavedMobileNumbersavedMobileNumbersavedMobileNumbersavedMobileNumbersavedMobileNumber');
+        print(savedMobileNumber);
 
         if (savedMobileNumber == 'null' ||
             savedMobileNumber.isEmpty) {
@@ -65,12 +72,24 @@ class MyAppState extends State<MyApp> {
           isLoggedIn = true;
           strMobileNumber = savedMobileNumber;
         }
+
+        print(isLoggedIn);
       } on Exception catch (error) {
+        debugPrint('errorerrorerrorerrorerrorerrorerrorerrorerror');
         debugPrint(error.toString());
       }
     });
 
     super.initState();
+  }
+
+  getAppDetails() async {
+    try {
+      final snapShot = await FirebaseFirestore.instance.collection(tblAppDetails).get();
+      dictAppDetails = snapShot.docs.map((doc) => doc.data()).toList()[0];
+    } catch (error) {
+      showError(context, error.message.toString());
+    }
   }
 
   @override
@@ -205,6 +224,7 @@ class MyAppState extends State<MyApp> {
     switch (routeName) {
       case '/':
         return isLoggedIn ? Loader() : OnboardingScreen() ;
+        // return CheckVersion();
       default:
         throw 'Route $routeName is not defined';
     }

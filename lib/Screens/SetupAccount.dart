@@ -154,11 +154,11 @@ class _SetupAccountState extends State<SetupAccount> {
                   ),
                   onPressed:() {
                     if (txtUserName.text.isEmpty) {
-                      shwoError(context, 'Enter a user name');
+                      showError(context, 'Enter a user name');
                     } else if (txtEmail.text.isEmpty) {
-                      shwoError(context, 'Enter your email');
+                      showError(context, 'Enter your email');
                     } else if (!txtEmail.text.isValidEmail()) {
-                      shwoError(context, 'Enter a valid email');
+                      showError(context, 'Enter a valid email');
                     } else {
                       createInvitationCode();
                     }
@@ -185,6 +185,5 @@ class _SetupAccountState extends State<SetupAccount> {
       createUserWithEmailAndPassword(context, txtUserName.text, txtEmail.text, '123456');
       setInvitedList(context, txtUserName.text);
   }
-
 
 }

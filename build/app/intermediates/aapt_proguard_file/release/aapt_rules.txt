@@ -1,0 +1,175 @@
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:45
+-keep class androidx.core.app.CoreComponentFactory { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:438
+-keep class androidx.room.MultiInstanceInvalidationService { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:354
+-keep class androidx.work.impl.WorkManagerInitializer { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:378
+-keep class androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:388
+-keep class androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:408
+-keep class androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:398
+-keep class androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:428
+-keep class androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:417
+-keep class androidx.work.impl.background.systemalarm.RescheduleReceiver { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:361
+-keep class androidx.work.impl.background.systemalarm.SystemAlarmService { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:366
+-keep class androidx.work.impl.background.systemjob.SystemJobService { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:373
+-keep class androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:234
+-keep class com.adcolony.sdk.AdColonyAdViewActivity { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:229
+-keep class com.adcolony.sdk.AdColonyInterstitialActivity { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:245
+-keep class com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:244
+-keep class com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:346
+-keep class com.facebook.CurrentAccessTokenExpirationBroadcastReceiver { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:119
+-keep class com.facebook.CustomTabActivity { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:331
+-keep class com.facebook.CustomTabMainActivity { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:114
+-keep class com.facebook.FacebookActivity { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:203
+-keep class com.facebook.ads.AudienceNetworkActivity { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:209
+-keep class com.facebook.ads.AudienceNetworkContentProvider { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:341
+-keep class com.facebook.internal.FacebookInitProvider { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:57
+-keep class com.gami.MainActivity { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:441
+-keep class com.google.android.datatransport.runtime.backends.TransportBackendDiscovery { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:454
+-keep class com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:448
+-keep class com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:307
+-keep class com.google.android.gms.ads.AdActivity { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:319
+-keep class com.google.android.gms.ads.AdService { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:313
+-keep class com.google.android.gms.ads.MobileAdsInitProvider { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:223
+-keep class com.google.android.gms.auth.api.signin.RevocationBoundService { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:214
+-keep class com.google.android.gms.auth.api.signin.internal.SignInHubActivity { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:287
+-keep class com.google.android.gms.common.api.GoogleApiActivity { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:302
+-keep class com.google.android.gms.measurement.AppMeasurementJobService { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:292
+-keep class com.google.android.gms.measurement.AppMeasurementReceiver { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:298
+-keep class com.google.android.gms.measurement.AppMeasurementService { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:258
+-keep class com.google.firebase.auth.internal.FederatedSignInActivity { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:153
+-keep class com.google.firebase.components.ComponentDiscoveryService { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:278
+-keep class com.google.firebase.iid.FirebaseInstanceIdReceiver { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:269
+-keep class com.google.firebase.messaging.FirebaseMessagingService { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:324
+-keep class com.google.firebase.provider.FirebaseInitProvider { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:197
+-keep class io.flutter.plugins.firebasemessaging.FlutterFirebaseMessagingService { <init>(); }
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:254
+-keep class io.flutter.plugins.urllauncher.WebViewActivity { <init>(); }
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_alert_dialog_button_bar_material.xml:43
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_alert_dialog_material.xml:52
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_alert_dialog_title_material.xml:57
+-keep class android.widget.Space { <init>(...); }
+
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_select_dialog_material.xml:23
+-keep class androidx.appcompat.app.AlertController$RecycleListView { <init>(...); }
+
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_action_menu_item_layout.xml:17
+-keep class androidx.appcompat.view.menu.ActionMenuItemView { <init>(...); }
+
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_expanded_menu_layout.xml:17
+-keep class androidx.appcompat.view.menu.ExpandedMenuView { <init>(...); }
+
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_cascading_menu_item_layout.xml:20
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_list_menu_item_layout.xml:17
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_popup_menu_item_layout.xml:17
+-keep class androidx.appcompat.view.menu.ListMenuItemView { <init>(...); }
+
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_screen_toolbar.xml:27
+-keep class androidx.appcompat.widget.ActionBarContainer { <init>(...); }
+
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_action_mode_bar.xml:19
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_screen_toolbar.xml:43
+-keep class androidx.appcompat.widget.ActionBarContextView { <init>(...); }
+
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_screen_toolbar.xml:17
+-keep class androidx.appcompat.widget.ActionBarOverlayLayout { <init>(...); }
+
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_action_menu_layout.xml:17
+-keep class androidx.appcompat.widget.ActionMenuView { <init>(...); }
+
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_activity_chooser_view.xml:19
+-keep class androidx.appcompat.widget.ActivityChooserView$InnerLayout { <init>(...); }
+
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_alert_dialog_material.xml:18
+-keep class androidx.appcompat.widget.AlertDialogLayout { <init>(...); }
+
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/2ff7053dc09ac2da81f787226a3970d5/jetified-facebook-common-8.1.0/res/layout/com_facebook_device_auth_dialog_fragment.xml:45
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/2ff7053dc09ac2da81f787226a3970d5/jetified-facebook-common-8.1.0/res/layout/com_facebook_smart_device_dialog_fragment.xml:47
+-keep class androidx.appcompat.widget.AppCompatImageView { <init>(...); }
+
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_alert_dialog_button_bar_material.xml:26
+-keep class androidx.appcompat.widget.ButtonBarLayout { <init>(...); }
+
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_screen_content_include.xml:19
+-keep class androidx.appcompat.widget.ContentFrameLayout { <init>(...); }
+
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_alert_dialog_title_material.xml:45
+-keep class androidx.appcompat.widget.DialogTitle { <init>(...); }
+
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_screen_simple_overlay_action_mode.xml:23
+-keep class androidx.appcompat.widget.FitWindowsFrameLayout { <init>(...); }
+
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_dialog_title_material.xml:22
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_screen_simple.xml:17
+-keep class androidx.appcompat.widget.FitWindowsLinearLayout { <init>(...); }
+
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_search_view.xml:75
+-keep class androidx.appcompat.widget.SearchView$SearchAutoComplete { <init>(...); }
+
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_screen_toolbar.xml:36
+-keep class androidx.appcompat.widget.Toolbar { <init>(...); }
+
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_screen_simple.xml:25
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_screen_simple_overlay_action_mode.xml:32
+-keep class androidx.appcompat.widget.ViewStubCompat { <init>(...); }
+
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/239c42a62855a901f85a02f14ceef58c/browser-1.0.0/res/layout/browser_actions_context_menu_page.xml:5
+-keep class androidx.browser.browseractions.BrowserActionsFallbackMenuView { <init>(...); }
+
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/2ff7053dc09ac2da81f787226a3970d5/jetified-facebook-common-8.1.0/res/layout/com_facebook_device_auth_dialog_fragment.xml:22
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/2ff7053dc09ac2da81f787226a3970d5/jetified-facebook-common-8.1.0/res/layout/com_facebook_smart_device_dialog_fragment.xml:22
+-keep class androidx.cardview.widget.CardView { <init>(...); }
+
+# Referenced at /Users/granzax/.gradle/caches/transforms-2/files-2.1/35e412571ba3676afab9ea684f8eada0/appcompat-1.1.0/res/layout/abc_alert_dialog_material.xml:41
+-keep class androidx.core.widget.NestedScrollView { <init>(...); }
+
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/facebook_audience_network/intermediates/packaged_res/release/layout/fb_native_media_item_ad.xml:16
+-keep class com.facebook.ads.AdIconView { <init>(...); }
+
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/facebook_audience_network/intermediates/packaged_res/release/layout/fb_native_ad_layout_horizontal.xml:24
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/facebook_audience_network/intermediates/packaged_res/release/layout/fb_native_ad_layout_vertical.xml:15
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/facebook_audience_network/intermediates/packaged_res/release/layout/fb_native_media_item_ad.xml:51
+-keep class com.facebook.ads.MediaView { <init>(...); }
+
+# Referenced at /Users/granzax/Projects/Flutter/gami/build/facebook_audience_network/intermediates/packaged_res/release/layout/fb_native_ad_container.xml:7
+-keep class com.facebook.ads.NativeAdLayout { <init>(...); }
+

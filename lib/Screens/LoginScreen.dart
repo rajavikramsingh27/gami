@@ -174,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     isFromSignUp = false;
 
                     if (txtPhoneNumber.text.isEmpty) {
-                      shwoError(context, 'Enter your phone number');
+                      showError(context, 'Enter your phone number');
                     } else {
                       isFromSignUp = false;
                       strMobileNumber = strDialCode+txtPhoneNumber.text;

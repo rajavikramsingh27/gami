@@ -186,9 +186,9 @@ class _OTPScreenState extends State<OTPScreen> {
                   onPressed:() {
 
                     if (txtOTP.text.isEmpty) {
-                      shwoError(context, 'Enter your OTP.');
+                      showError(context, 'Enter your OTP.');
                     } else if (txtOTP.text.length < 6) {
-                      shwoError(context, 'Enter a valid OTP.');
+                      showError(context, 'Enter a valid OTP.');
                     } else {
                       verifyOTP(context, txtOTP.text);
                     }

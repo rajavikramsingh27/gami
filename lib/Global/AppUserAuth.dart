@@ -13,6 +13,9 @@ import 'package:gami/Screens/Tabbar.dart';
 import 'package:gami/Screens/OTP_Screen.dart';
 import 'package:gami/Screens/SetupAccount.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/intl.dart';
+import 'package:dart_notification_center/dart_notification_center.dart';
+
 
 
 gmailSignIn(context) async {
@@ -89,12 +92,12 @@ createUserWithEmailAndPassword(context, String userName, String email, String pa
   } on FirebaseAuthException catch (error) {
     dismissLoading(context);
     if (error.code == 'weak-password') {
-      shwoError(context, error.message.toString());
+      showError(context, error.message.toString());
     } else if (error.code == 'email-already-in-use') {
-      shwoError(context, error.message.toString());
+      showError(context, error.message.toString());
     }
   } catch (error) {
-    shwoError(context, error.message.toString());
+    showError(context, error.message.toString());
     dismissLoading(context);
   }
 }
@@ -130,13 +133,13 @@ signInWithEmailAndPassword(context, String email, String password, ) async {
     dismissLoading(context);
     print(e.message.toString());
     if (e.code == 'weak-password') {
-      shwoError(context, e.message.toString());
+      showError(context, e.message.toString());
     } else if (e.code == 'email-already-in-use') {
-      shwoError(context, e.message.toString());
+      showError(context, e.message.toString());
     }
   } catch (e) {
     print(e.message.toString());
-    shwoError(context, e.message.toString());
+    showError(context, e.message.toString());
     dismissLoading(context);
   }
 }
@@ -200,7 +203,7 @@ getOTP(context) async {
   }).catchError((error) {
     print(error.message.toString());
     dismissLoading(context);
-    shwoError(context, error.message.toString());
+    showError(context, error.message.toString());
   });
 
 }
@@ -224,7 +227,7 @@ resendOTP(context) async {
     dismissLoading(context);
   }).catchError((error) {
     dismissLoading(context);
-    shwoError(context, error.message.toString());
+    showError(context, error.message.toString());
   });
 
 }
@@ -246,11 +249,11 @@ void verifyOTP(context, String otp) async {
     }).catchError((error) {
       print(error.message.toString());
       dismissLoading(context);
-      shwoError(context, error.message.toString());
+      showError(context, error.message.toString());
     });
   } catch (error) {
     dismissLoading(context);
-   shwoError(context, 'strVerificationID is null '+error.message.toString());
+    showError(context, 'strVerificationID is null '+error.message.toString());
   }
 }
 
@@ -303,9 +306,9 @@ funcRegistered(context) async {
       );
     } else {
       if (isInvitatedCodeExist) {
-        shwoError(context, 'Please Enter a Valid Invitation Code');
+        showError(context, 'Please Enter a Valid Invitation Code');
       } else if (isNumberRegistered) {
-        shwoError(context, 'This number is registered already.');
+        showError(context, 'This number is registered already.');
       }
     }
   }
@@ -339,45 +342,120 @@ funcLogin(context) async {
       ),
     );
   } else {
-    shwoError(context, 'This number is not registered.');
+    showError(context, 'This number is not registered.');
   }
 }
 
-// setInvitedList(context, String full_name, Uint8List image) {
 setInvitedList(context, String fullName) {
-  // final currentUser = FirebaseAuth.instance.currentUser;
+  final time = DateTime.now().microsecondsSinceEpoch.toString();
 
   FirebaseFirestore.instance
       .collection(tblInvitedList)
       .doc(strInvitatedCodeUsed)
-      // .collection(currentUser.uid)
       .collection(strInvitatedCodeUsed)
       .doc(fullName.split(' ')[0]+kFireBaseConnect+strInvitationCode)
       .set({
-    kID: DateTime.now().microsecondsSinceEpoch.toString(),
-    kUserName: fullName,
+    kID: time,
     kProfilePicture: '',
+    kUserName: fullName,
     kInvitationCode: strInvitationCode,
-    kCreatedTime: DateTime.now().millisecondsSinceEpoch.toString(),
+    kCreatedTime: time,
   }).then((value) {
+    final strDate = DateFormat('dd MMM yyyy').format(DateTime.now());
+    getGlobalSettings(context, strInvitatedCodeUsed, strDate, 'invite');
   }).catchError((error) {
-    shwoError(context, error.message.toString());
+    showError(context, error.message.toString());
   });
 }
 
-shwoError(context,String message) {
-  ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        backgroundColor:Colors.red,
-        content:Text(
-          message,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              color:Colors.white,
-              fontSize: 18
-          ),
-        ),
-      )
-  );
+getGlobalSettings(context, String fireBasePath, String strDate, String globalKey) async {
+  final snapShot = await FirebaseFirestore.instance.collection(tblGlobalSettings).get();
+  final arrGlobalSettings = snapShot.docs.map((doc) => doc.data()).toList();
+
+  getTransactions(context, fireBasePath, strDate, {globalKey: arrGlobalSettings[0][globalKey].toString()});
 }
+
+getTransactions(context, String fireBasePath, String strDate, Map<String, dynamic> dictTransaction) async {
+  // final strDate = '01 Sep 2021';
+  // final strDate = '31 Aug 2021';
+  // final strDate = DateFormat('dd MMM yyyy').format(DateTime.now());
+
+  final docSnap = await FirebaseFirestore.instance
+      .collection(tblTransactions)
+      .doc(fireBasePath)
+      .collection(fireBasePath)
+      .doc(strDate)
+      .get();
+
+  final docSnapData = docSnap.data();
+
+  String key = dictTransaction.keys.elementAt(0);
+  String value = dictTransaction.values.elementAt(0);
+  int transactions = 0;
+
+  if (docSnapData != null) {
+    transactions = int.parse(docSnapData[key].toString());
+    transactions = transactions+int.parse(value);
+  }
+
+  final dictTransactionUpdate = {
+    key: (docSnapData == null) ? value : transactions.toString()
+  };
+
+  (docSnapData == null)
+      ? setTransactions(context, fireBasePath, strDate, dictTransactionUpdate)
+      : updateTransactions(fireBasePath, strDate, dictTransactionUpdate) ;
+}
+
+setTransactions(context, String fireBasePath, String strDate, Map<String, dynamic> dictTransaction) {
+  final time = DateTime.now().microsecondsSinceEpoch.toString();
+
+  // final strDate = '01 Sep 2021';
+  // final strDate = '31 Aug 2021';
+  // final strDate = DateFormat('dd MMM yyyy').format(DateTime.now());
+
+  FirebaseFirestore.instance
+      .collection(tblTransactions)
+      .doc(fireBasePath)
+      .collection(fireBasePath)
+      .doc(strDate)
+      .set({
+    kID: time,
+    kCreatedTime: strDate,
+    'currency': "\$",
+    'attention': '0',
+    'invite': '0',
+    'mining': '0',
+  }).then((value) {
+    updateTransactions(fireBasePath, strDate, dictTransaction);
+  }).catchError((error) {
+    showError(context, error.message.toString());
+  });
+
+}
+
+updateTransactions( String fireBasePath, String strDate, Map<String, dynamic> dictTransaction) {
+  // final strDate = '01 Sep 2021';
+  // final strDate = '31 Aug 2021';
+  // final strDate = DateFormat('dd MMM yyyy').format(DateTime.now());
+
+  FirebaseFirestore.instance
+      .collection(tblTransactions)
+      .doc(fireBasePath)
+      .collection(fireBasePath)
+      .doc(strDate)
+      .update( dictTransaction ).then((value) {
+    DartNotificationCenter.post(channel:tblTransactions);
+  });
+}
+
+// updateRewardInvitedUser() {
+//   int rewardEarnings = int.parse(dictInvitedUser[kRewardEarnings].toString());
+//   rewardEarnings = rewardEarnings+5;
+//   FirebaseFirestore.instance.collection(tblUserDetails)
+//       .doc(dictInvitedUser[kMobileNumber].toString()).update({
+//     kRewardEarnings: rewardEarnings.toString(),
+//   });
+//
+// }
 

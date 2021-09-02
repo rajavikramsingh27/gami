@@ -15,7 +15,6 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-
   final txtPhoneNumber = TextEditingController();
   final txtInviteCode = TextEditingController();
 
@@ -23,7 +22,6 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     strDialCode = '+91';
@@ -31,12 +29,13 @@ class _SignupScreenState extends State<SignupScreen> {
     Future.delayed(Duration(microseconds: 100), () {
       getAllUsers();
     });
+
   }
 
   getAllUsers() async {
     showLoading(context);
 
-    final snapShot = await FirebaseFirestore.instance.collection('userDetails').get();
+    final snapShot = await FirebaseFirestore.instance.collection(tblUserDetails).get();
     arrAllUserList = snapShot.docs.map((doc) => doc.data()).toList();
     Navigator.pop(context);
   }
@@ -45,12 +44,16 @@ class _SignupScreenState extends State<SignupScreen> {
     bool isValidInviteCode;
 
     for(final dictUserDetail in arrAllUserList) {
-      if (txtInviteCode.text == dictUserDetail['invitationCode'].toString()) {
+
+      if (txtInviteCode.text == dictUserDetail[kInvitationCode].toString()) {
+        dictInvitedUser = dictUserDetail;
         isValidInviteCode = true;
+
         break;
       } else {
         isValidInviteCode = false;
       }
+
     }
 
     return isValidInviteCode;
@@ -77,10 +80,8 @@ class _SignupScreenState extends State<SignupScreen> {
                       )
                   ),
                   child: Center(
-                    child:
-                    buildSTatusText(),
+                    child: buildSTatusText(),
                   )
-
               ),
             ),
             SafeArea(
@@ -237,11 +238,11 @@ class _SignupScreenState extends State<SignupScreen> {
                     FocusScope.of(context).unfocus();
 
                     if (txtPhoneNumber.text.isEmpty) {
-                      shwoError(context, 'Enter your phone number');
+                      showError(context, 'Enter your phone number');
                     } else if (txtInviteCode.text.isEmpty) {
-                      shwoError(context, 'Enter a invite code');
+                      showError(context, 'Enter a invite code');
                     } else if (!isValidInvitationCode())  {
-                      shwoError(context, 'Enter a valid invitation code');
+                      showError(context, 'Enter a valid invitation code');
                     } else {
                       isFromSignUp = true;
                       strMobileNumber =  strDialCode+txtPhoneNumber.text;
